@@ -1,13 +1,21 @@
-import { View, Text, Image } from "react-native";
+import {
+    View,
+    Text,
+    Image,
+    StyleSheet,
+    FlatList,
+    ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import PokedexItem from "../components/PokedexItem";
 
 type BasePokemonResponse = {
     name: string;
     url: string;
 };
 
-type UpdatedPokemonResponse = {
+export type UpdatedPokemonResponse = {
     name: string;
     url: string;
     image_url: string;
@@ -48,18 +56,28 @@ const HomeScreen = () => {
     }, [pokemonList]);
 
     return (
-        <View>
-            {updatedPokemonList.map((pokemon) => (
-                <View key={pokemon.name}>
-                    <Text>{pokemon.name}</Text>
-                    <Image
-                        source={{ uri: pokemon.image_url }}
-                        style={{ height: 50, width: 50 }}
-                    />
-                </View>
-            ))}
+        <View style={styles.container}>
+            <ScrollView
+                contentContainerStyle={{
+                    flexGrow: 1,
+                    marginTop: 10,
+                }}
+            >
+                <FlatList
+                    data={updatedPokemonList}
+                    renderItem={({ item }) => <PokedexItem pokemon={item} />}
+                />
+            </ScrollView>
         </View>
     );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: "#F1948A", // pink
+        backgroundImage: "linear-gradient(to right, #F1948A, #FADBD8)", // gradient
+        flex: 1,
+    },
+});
