@@ -28,6 +28,7 @@ const HomeScreen = () => {
     const [updatedPokemonList, setUpdatedPokemonList] = useState<
         Array<UpdatedPokemonResponse>
     >([]);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -66,6 +67,7 @@ const HomeScreen = () => {
                 <FlatList
                     data={updatedPokemonList}
                     renderItem={({ item }) => <PokedexItem pokemon={item} />}
+                    onEndReachedThreshold={0.2}
                 />
             </ScrollView>
         </View>
