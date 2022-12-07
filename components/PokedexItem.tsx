@@ -11,7 +11,9 @@ interface PokedexItemProps {
 }
 
 export type RootStackParamList = {
-    Pokemon: undefined;
+    Pokemon: {
+        pokemon: UpdatedPokemonResponse;
+    };
 };
 
 function PokedexItem({ pokemon }: PokedexItemProps) {
@@ -21,7 +23,9 @@ function PokedexItem({ pokemon }: PokedexItemProps) {
         >();
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Pokemon")}>
+        <TouchableOpacity
+            onPress={() => navigation.navigate("Pokemon", { pokemon })}
+        >
             <View style={styles.container}>
                 <View style={styles.circle}>
                     <Image
