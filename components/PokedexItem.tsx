@@ -3,14 +3,25 @@ import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { UpdatedPokemonResponse } from "../screens/HomeScreen";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface PokedexItemProps {
     pokemon: UpdatedPokemonResponse;
 }
 
+export type RootStackParamList = {
+    Pokemon: undefined;
+};
+
 function PokedexItem({ pokemon }: PokedexItemProps) {
+    const navigation =
+        useNavigation<
+            NativeStackNavigationProp<RootStackParamList, "Pokemon">
+        >();
+
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Pokemon")}>
             <View style={styles.container}>
                 <View style={styles.circle}>
                     <Image
