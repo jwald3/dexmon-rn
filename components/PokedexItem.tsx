@@ -2,6 +2,7 @@ import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { UpdatedPokemonResponse } from "../screens/HomeScreen";
+import { ChevronRightIcon } from "react-native-heroicons/outline";
 
 interface PokedexItemProps {
     pokemon: UpdatedPokemonResponse;
@@ -19,7 +20,7 @@ function PokedexItem({ pokemon }: PokedexItemProps) {
                 </View>
                 <Text style={styles.pokemonName}>{pokemon.name}</Text>
                 <View style={styles.arrow}>
-                    {/* add an image of an arrow here */}
+                    <ChevronRightIcon size={28} color="#fff" />
                 </View>
             </View>
         </TouchableOpacity>
