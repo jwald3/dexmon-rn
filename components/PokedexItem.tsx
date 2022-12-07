@@ -5,6 +5,7 @@ import { UpdatedPokemonResponse } from "../screens/HomeScreen";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { capitalize } from "../typescript/functions";
 
 interface PokedexItemProps {
     pokemon: UpdatedPokemonResponse;
@@ -33,7 +34,9 @@ function PokedexItem({ pokemon }: PokedexItemProps) {
                         source={{ uri: pokemon.image_url }}
                     />
                 </View>
-                <Text style={styles.pokemonName}>{pokemon.name}</Text>
+                <Text style={styles.pokemonName}>
+                    {capitalize(pokemon.name)}
+                </Text>
                 <View style={styles.arrow}>
                     <ChevronRightIcon size={28} color="#fff" />
                 </View>
