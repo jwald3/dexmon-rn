@@ -36,25 +36,23 @@ const HomeScreen = () => {
                 "https://pokeapi.co/api/v2/pokemon"
             );
 
-            setPokemonList(response.data.results);
+            const updatedList = response.data.results.map(
+                async (pokemon: BasePokemonResponse) => {
+                    // Make an API call to the pokemon's url
+                    const res = await axios.get(pokemon.url);
+
+                    return {
+                        name: pokemon.name,
+                        url: pokemon.url,
+                        image_url: res.data.sprites.front_default,
+                    };
+                }
+            );
+
+            setUpdatedPokemonList(await Promise.all(updatedList));
         };
         fetchData();
     }, []);
-
-    useEffect(() => {
-        pokemonList.forEach((pokemon) =>
-            axios.get(pokemon.url).then((data) => {
-                setUpdatedPokemonList((prev) => [
-                    ...prev,
-                    {
-                        name: pokemon.name,
-                        url: pokemon.url,
-                        image_url: data.data.sprites.front_default,
-                    },
-                ]);
-            })
-        );
-    }, [pokemonList]);
 
     return (
         <View style={styles.container}>
