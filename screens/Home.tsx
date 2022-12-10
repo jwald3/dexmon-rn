@@ -1,13 +1,7 @@
-import {
-    View,
-    Text,
-    FlatList,
-    Image,
-    StyleSheet,
-    ActivityIndicator,
-} from "react-native";
+import { View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PokedexItem from "../components/PokedexItem";
 
 type BasePokemonResponse = {
     name: string;
@@ -23,7 +17,7 @@ type UpdatedPokemonResponse = {
 };
 
 type RenderPokemon = {
-    item: UpdatedPokemonResponse | BasePokemonResponse;
+    item: UpdatedPokemonResponse;
 };
 
 const Home = () => {
@@ -60,25 +54,13 @@ const Home = () => {
                 updatedPokemonList.concat(await Promise.all(updatedList))
             );
         };
+        setIsLoading(true);
         fetchData();
+        setIsLoading(false);
     }, [currentPage]);
 
     const loadMoreItems = () => {
         setCurrentPage(currentPage + 1);
-    };
-
-    const renderItem = ({ item }: RenderPokemon) => {
-        return (
-            <View style={styles.itemWrapper}>
-                <Image
-                    style={styles.itemImage}
-                    source={{ uri: item.image_url }}
-                />
-                <View style={styles.contentWrapper}>
-                    <Text style={styles.textName}>{`${item.name}`}</Text>
-                </View>
-            </View>
-        );
     };
 
     const renderLoader = () => {
@@ -90,40 +72,26 @@ const Home = () => {
     };
 
     return (
-        <FlatList
-            data={updatedPokemonList}
-            renderItem={renderItem}
-            keyExtractor={(item) => String(item.name)}
-            ListFooterComponent={renderLoader}
-            onEndReached={loadMoreItems}
-            onEndReachedThreshold={0.2}
-        />
+        <View style={styles.container}>
+            <FlatList
+                data={updatedPokemonList}
+                renderItem={({ item }) => <PokedexItem pokemon={item} />}
+                keyExtractor={(item) => String(item.name)}
+                ListFooterComponent={renderLoader}
+                onEndReached={loadMoreItems}
+                onEndReachedThreshold={0.2}
+            />
+        </View>
     );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
-    itemWrapper: {
-        flexDirection: "row",
-        paddingHorizontal: 16,
-        paddingVertical: 16,
-        borderBottomWidth: 1,
-        borderColor: "#ddd",
-    },
-    itemImage: {
-        width: 50,
-        height: 50,
-        marginRight: 16,
-    },
-    contentWrapper: {
-        justifyContent: "space-around",
-    },
-    textName: {
-        fontSize: 16,
-    },
-    textEmail: {
-        color: "#777",
+    container: {
+        backgroundColor: "#F1948A", // pink
+        backgroundImage: "linear-gradient(to right, #F1948A, #FADBD8)", // gradient
+        flex: 1,
     },
     loader: {
         marginVertical: 16,
