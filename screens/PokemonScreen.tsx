@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
 import PokemonType from "../components/PokemonType";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -147,7 +148,7 @@ const PokemonScreen = () => {
     );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         flex: 1,
     },
@@ -186,6 +187,11 @@ const styles = StyleSheet.create({
         top: 20,
         left: 20,
         boxShadow: "0 0 8px #333",
+        shadowColor: "#000",
+        shadowOffset: { width: -2, height: -2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 1,
     },
     body: {
         padding: 20,
