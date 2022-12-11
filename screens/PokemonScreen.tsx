@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
+import PokemonType from "../components/PokemonType";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -123,20 +124,22 @@ const PokemonScreen = () => {
                         <Image
                             style={styles.image}
                             source={{ uri: updatedPokemon.official_art }}
-                            resizeMode="contain"
+                            resizeMode="cover"
                         />
                     </View>
                 </View>
             </View>
             <View style={styles.body}>
-                {/* <Text style={styles.subtitle}>Types:</Text>
-               {pokemon.types.map((type) => (
-                   <View style={styles.type} key={type}>
-                       <Text>{type}</Text>
-                   </View>
-               ))}
-               <Text style={styles.subtitle}>Details:</Text>
-               <Text>{pokemon.description}</Text> */}
+                <Text style={styles.subtitle}>Types:</Text>
+                <View style={styles.typesContainer}>
+                    {pokemon.types.map((type) => (
+                        <View style={styles.type}>
+                            <PokemonType type={type.type.name} />
+                        </View>
+                    ))}
+                </View>
+
+                <Text style={styles.subtitle}>Details:</Text>
             </View>
         </LinearGradient>
     ) : (
@@ -186,12 +189,24 @@ const styles = StyleSheet.create({
     },
     body: {
         padding: 20,
+        maxWidth: 1000,
+        width: 500,
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+    typesContainer: {
+        maxWidth: 500,
+        flex: 1,
+        flexDirection: "row",
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     subtitle: {
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 10,
         marginBottom: 10,
+        alignSelf: "center",
     },
     type: {
         padding: 5,
