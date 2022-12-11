@@ -1,14 +1,54 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import React from "react";
-import { UpdatedPokemonResponse } from "./HomeScreen";
+import React, { useState, useEffect } from "react";
+import { UpdatedPokemonResponse } from "./Home";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { capitalize } from "../typescript/functions";
+import axios from "axios";
 
 export type RootStackParamList = {
     Pokemon: {
         pokemon: UpdatedPokemonResponse;
+    };
+};
+
+type UpdatedPoke = {
+    name: string;
+    url: string;
+    image_url: string;
+    id: number;
+    types: [
+        {
+            type: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    stats: [
+        {
+            base_stat: number;
+            stat: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    official_art: string;
+    classification: Array<{
+        genus: string;
+        language: {
+            name: string;
+            url: string;
+        };
+    }>;
+    flavor_text: {
+        flavor_text: string;
+        language: {
+            name: string;
+            url: string;
+        };
     };
 };
 
@@ -17,19 +57,72 @@ const PokemonScreen = () => {
         params: { pokemon },
     } = useRoute<RouteProp<RootStackParamList, "Pokemon">>();
 
-    return (
+    const [updatedPokemon, setUpdatedPokemon] = useState<UpdatedPoke>();
+
+    useEffect(() => {
+        axios
+            .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
+            .then((data) => {
+                const updatePoke = {
+                    name: pokemon.name,
+                    url: pokemon.url,
+                    image_url: pokemon.image_url,
+                    id: pokemon.id,
+                    types: pokemon.types,
+                    stats: pokemon.stats,
+                    official_art: pokemon.official_art,
+                    classification: data.data.genera,
+                    flavor_text: data.data.flavor_text_entries,
+                };
+
+                const filteredClassification = updatePoke.classification.filter(
+                    (classification: {
+                        genus: string;
+                        language: { name: string };
+                    }) => classification.language.name === "en"
+                );
+
+                const filteredText = updatePoke.flavor_text.filter(
+                    (text: {
+                        flavor_text: string;
+                        language: { name: string };
+                    }) => text.language.name === "en"
+                );
+
+                const newPoke = {
+                    name: updatePoke.name,
+                    url: updatePoke.url,
+                    image_url: updatePoke.image_url,
+                    id: updatePoke.id,
+                    types: updatePoke.types,
+                    stats: updatePoke.stats,
+                    official_art: updatePoke.official_art,
+                    classification: filteredClassification,
+                    flavor_text: filteredText,
+                };
+
+                setUpdatedPokemon(newPoke);
+            });
+    }, []);
+
+    console.log(updatedPokemon);
+
+    return updatedPokemon ? (
         <LinearGradient
             colors={["#ebfaf5", "#85e0c2"]}
             style={styles.container}
         >
             <View style={styles.header}>
-                <Text style={styles.title}>{capitalize(pokemon.name)}</Text>
+                <Text style={styles.title}>
+                    {capitalize(updatedPokemon.name)}
+                </Text>
+                <Text>{updatedPokemon.classification[0].genus}</Text>
                 <View style={styles.imageContainer}>
                     <View style={styles.circle}>
                         <View style={styles.innerCircle} />
                         <Image
                             style={styles.image}
-                            source={{ uri: pokemon.image_url }}
+                            source={{ uri: updatedPokemon.official_art }}
                             resizeMode="contain"
                         />
                     </View>
@@ -46,6 +139,8 @@ const PokemonScreen = () => {
                <Text>{pokemon.description}</Text> */}
             </View>
         </LinearGradient>
+    ) : (
+        <View></View>
     );
 };
 

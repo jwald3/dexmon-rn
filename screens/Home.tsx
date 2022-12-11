@@ -6,14 +6,31 @@ import PokedexItem from "../components/PokedexItem";
 type BasePokemonResponse = {
     name: string;
     url: string;
-    image_url?: string;
 };
 
-type UpdatedPokemonResponse = {
+export type UpdatedPokemonResponse = {
     name: string;
     url: string;
     image_url: string;
     id: number;
+    types: [
+        {
+            type: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    stats: [
+        {
+            base_stat: number;
+            stat: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    official_art: string;
 };
 
 type RenderPokemon = {
@@ -45,6 +62,12 @@ const Home = () => {
                         name: pokemon.name,
                         url: pokemon.url,
                         image_url: res.data.sprites.front_default,
+                        types: res.data.types,
+                        stats: res.data.stats,
+                        official_art:
+                            res.data.sprites["other"]["official-artwork"]
+                                .front_default,
+                        id: res.data.id,
                     };
                 }
             );
@@ -63,6 +86,10 @@ const Home = () => {
         setCurrentPage(currentPage + 1);
     };
 
+    const renderItem = ({ item }: RenderPokemon) => {
+        return <PokedexItem pokemon={item} />;
+    };
+
     const renderLoader = () => {
         return isLoading ? (
             <View style={styles.loader}>
@@ -75,11 +102,14 @@ const Home = () => {
         <View style={styles.container}>
             <FlatList
                 data={updatedPokemonList}
-                renderItem={({ item }) => <PokedexItem pokemon={item} />}
+                initialNumToRender={20}
+                renderItem={renderItem}
                 keyExtractor={(item) => String(item.name)}
                 ListFooterComponent={renderLoader}
                 onEndReached={loadMoreItems}
                 onEndReachedThreshold={0.2}
+                removeClippedSubviews={true}
+                maxToRenderPerBatch={20}
             />
         </View>
     );
