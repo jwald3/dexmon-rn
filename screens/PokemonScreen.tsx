@@ -8,6 +8,7 @@ import { capitalize } from "../typescript/functions";
 import axios from "axios";
 import PokemonType from "../components/PokemonType";
 import EStyleSheet from "react-native-extended-stylesheet";
+import GridRow from "../components/GridRow";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -115,9 +116,6 @@ const PokemonScreen = () => {
                 <Text style={styles.title}>
                     {capitalize(updatedPokemon.name)}
                 </Text>
-                <Text style={styles.subtitleText}>
-                    {updatedPokemon.classification[0].genus}
-                </Text>
                 <View style={styles.imageContainer}>
                     <View style={styles.circle}>
                         <View style={styles.innerCircle} />
@@ -129,18 +127,15 @@ const PokemonScreen = () => {
                     </View>
                 </View>
             </View>
-            {/* <View style={styles.body}>
-                <Text style={styles.subtitle}>Types:</Text>
-                <View style={styles.typesContainer}>
-                    {pokemon.types.map((type) => (
-                        <View style={styles.type}>
-                            <PokemonType type={type.type.name} />
-                        </View>
-                    ))}
-                </View>
-
-                <Text style={styles.subtitle}>Details:</Text>
-            </View> */}
+            <View
+                style={{
+                    width: "90%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                }}
+            >
+                <GridRow />
+            </View>
         </View>
     ) : (
         <View></View>
