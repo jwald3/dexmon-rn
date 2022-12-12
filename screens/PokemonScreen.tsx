@@ -108,8 +108,6 @@ const PokemonScreen = () => {
             });
     }, []);
 
-    console.log(updatedPokemon);
-
     return updatedPokemon ? (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -134,7 +132,7 @@ const PokemonScreen = () => {
                     marginRight: "auto",
                 }}
             >
-                <GridRow />
+                <GridRow pokemon={updatedPokemon} />
             </View>
         </View>
     ) : (
