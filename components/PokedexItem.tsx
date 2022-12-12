@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderBottomColor: "#fff",
+        borderBottomColor: "#42AD4A",
         borderBottomStyle: "solid",
         marginHorizontal: 10,
     },

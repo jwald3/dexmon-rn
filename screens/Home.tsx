@@ -119,8 +119,7 @@ export default Home;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#F1948A", // pink
-        backgroundImage: "linear-gradient(to right, #F1948A, #FADBD8)", // gradient
+        backgroundColor: "#383838", // pink
         flex: 1,
     },
     loader: {

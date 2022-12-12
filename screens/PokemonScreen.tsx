@@ -110,27 +110,26 @@ const PokemonScreen = () => {
     console.log(updatedPokemon);
 
     return updatedPokemon ? (
-        <LinearGradient
-            colors={["#ebfaf5", "#85e0c2"]}
-            style={styles.container}
-        >
+        <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>
                     {capitalize(updatedPokemon.name)}
                 </Text>
-                <Text>{updatedPokemon.classification[0].genus}</Text>
+                <Text style={styles.subtitleText}>
+                    {updatedPokemon.classification[0].genus}
+                </Text>
                 <View style={styles.imageContainer}>
                     <View style={styles.circle}>
                         <View style={styles.innerCircle} />
                         <Image
                             style={styles.image}
                             source={{ uri: updatedPokemon.official_art }}
-                            resizeMode="cover"
+                            resizeMode="contain"
                         />
                     </View>
                 </View>
             </View>
-            <View style={styles.body}>
+            {/* <View style={styles.body}>
                 <Text style={styles.subtitle}>Types:</Text>
                 <View style={styles.typesContainer}>
                     {pokemon.types.map((type) => (
@@ -141,8 +140,8 @@ const PokemonScreen = () => {
                 </View>
 
                 <Text style={styles.subtitle}>Details:</Text>
-            </View>
-        </LinearGradient>
+            </View> */}
+        </View>
     ) : (
         <View></View>
     );
@@ -151,15 +150,22 @@ const PokemonScreen = () => {
 const styles = EStyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#383838",
     },
     header: {
         alignItems: "center",
         paddingTop: 20,
         paddingBottom: 20,
+        color: "#fff",
     },
     title: {
         fontSize: 24,
         fontWeight: "bold",
+        color: "#fff",
+    },
+    subtitleText: {
+        fontSize: 16,
+        color: "#fff",
     },
     imageContainer: {
         position: "relative",
@@ -167,11 +173,13 @@ const styles = EStyleSheet.create({
     image: {
         width: 220,
         height: 220,
-        alignSelf: "center",
+        alignSelf: "start",
+        marginLeft: 10,
+        marginTop: 10,
     },
     circle: {
-        width: 240,
-        height: 240,
+        width: 250,
+        height: 250,
         borderRadius: 120,
         // borderWidth: 2,
         // borderColor: "#333",
@@ -182,7 +190,7 @@ const styles = EStyleSheet.create({
         width: 200,
         height: 200,
         borderRadius: 100,
-        backgroundColor: "rgba(255,255,255,0.55)",
+        backgroundColor: "rgba(255,255,255,0.50)",
         position: "absolute",
         top: 20,
         left: 20,
