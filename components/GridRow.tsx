@@ -39,6 +39,8 @@ type UpdatedPoke = {
             url: string;
         };
     };
+    height: number;
+    weight: number;
 };
 
 interface RowProps {
@@ -65,57 +67,19 @@ const GridRow = ({ pokemon }: RowProps) => {
                 value={pokemon.classification[0].genus}
                 image={false}
             />
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: "center",
-                    marginHorizontal: 5,
-                    shadowRadius: 10,
-                    shadowColor: "#000",
-                    shadowOpacity: 0.2,
-                    shadowOffset: { height: 2, width: 2 },
-                }}
-            >
-                <View
-                    style={{
-                        backgroundColor: "#42AD4A",
-                        width: "100%",
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <Text
-                        style={{
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Sprite
-                    </Text>
-                </View>
-                <View
-                    style={{
-                        flex: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Image
-                        source={{
-                            uri: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-                        }}
-                        style={{ width: 48, height: 48 }}
-                    />
-                </View>
-            </View>
+            <GridItem
+                category={"Sprite"}
+                value={pokemon.image_url}
+                image={true}
+            />
             <GridItem
                 category={"Height"}
-                value={pokemon.classification[0].genus}
+                value={`${pokemon.height / 10} m`}
                 image={false}
             />
             <GridItem
                 category={"Weight"}
-                value={pokemon.classification[0].genus}
+                value={`${pokemon.weight / 10} kg`}
                 image={false}
             />
             <GridItem

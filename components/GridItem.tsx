@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 
 interface GridItemProps {
@@ -44,7 +44,16 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                     justifyContent: "center",
                 }}
             >
-                <Text style={{ color: "#fff" }}>{value}</Text>
+                {image === true ? (
+                    <>
+                        <Image
+                            source={{ uri: value }}
+                            style={{ width: 48, height: 48 }}
+                        />
+                    </>
+                ) : (
+                    <Text style={{ color: "#fff" }}>{value}</Text>
+                )}
             </View>
         </View>
     );
