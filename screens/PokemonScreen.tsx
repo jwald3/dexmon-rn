@@ -9,6 +9,7 @@ import axios from "axios";
 import PokemonType from "../components/PokemonType";
 import EStyleSheet from "react-native-extended-stylesheet";
 import GridRow from "../components/GridRow";
+import FlavorTextBox from "../components/FlavorTextBox";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -46,13 +47,13 @@ type UpdatedPoke = {
             url: string;
         };
     }>;
-    flavor_text: {
+    flavor_text: Array<{
         flavor_text: string;
         language: {
             name: string;
             url: string;
         };
-    };
+    }>;
     height: number;
     weight: number;
 };
@@ -63,6 +64,8 @@ const PokemonScreen = () => {
     } = useRoute<RouteProp<RootStackParamList, "Pokemon">>();
 
     const [updatedPokemon, setUpdatedPokemon] = useState<UpdatedPoke>();
+
+    console.log(updatedPokemon);
 
     useEffect(() => {
         axios
@@ -139,6 +142,20 @@ const PokemonScreen = () => {
                 }}
             >
                 <GridRow pokemon={updatedPokemon} />
+            </View>
+            <View
+                style={{
+                    width: "90%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: 50,
+                    minHeight: 75,
+                    height: 100,
+                }}
+            >
+                <FlavorTextBox
+                    text={updatedPokemon.flavor_text[0].flavor_text}
+                />
             </View>
         </View>
     ) : (

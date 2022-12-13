@@ -32,13 +32,13 @@ type UpdatedPoke = {
             url: string;
         };
     }>;
-    flavor_text: {
+    flavor_text: Array<{
         flavor_text: string;
         language: {
             name: string;
             url: string;
         };
-    };
+    }>;
     height: number;
     weight: number;
 };
@@ -82,11 +82,7 @@ const GridRow = ({ pokemon }: RowProps) => {
                 value={`${pokemon.weight / 10} kg`}
                 image={false}
             />
-            <GridItem
-                category={"Type"}
-                value={pokemon.classification[0].genus}
-                image={false}
-            />
+            <GridItem category={"Type"} value={"Grass\nPoison"} image={false} />
         </View>
     );
 };
