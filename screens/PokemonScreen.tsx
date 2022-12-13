@@ -53,6 +53,8 @@ type UpdatedPoke = {
             url: string;
         };
     };
+    height: number;
+    weight: number;
 };
 
 const PokemonScreen = () => {
@@ -76,6 +78,8 @@ const PokemonScreen = () => {
                     official_art: pokemon.official_art,
                     classification: data.data.genera,
                     flavor_text: data.data.flavor_text_entries,
+                    height: pokemon.height,
+                    weight: pokemon.weight,
                 };
 
                 const filteredClassification = updatePoke.classification.filter(
@@ -102,6 +106,8 @@ const PokemonScreen = () => {
                     official_art: updatePoke.official_art,
                     classification: filteredClassification,
                     flavor_text: filteredText,
+                    height: updatePoke.height,
+                    weight: updatePoke.weight,
                 };
 
                 setUpdatedPokemon(newPoke);

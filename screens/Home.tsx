@@ -31,6 +31,8 @@ export type UpdatedPokemonResponse = {
         }
     ];
     official_art: string;
+    height: number;
+    weight: number;
 };
 
 type RenderPokemon = {
@@ -68,6 +70,8 @@ const Home = () => {
                             res.data.sprites["other"]["official-artwork"]
                                 .front_default,
                         id: res.data.id,
+                        height: res.data.height,
+                        weight: res.data.weight,
                     };
                 }
             );

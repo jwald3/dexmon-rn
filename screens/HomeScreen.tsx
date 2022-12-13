@@ -19,6 +19,8 @@ export type UpdatedPokemonResponse = {
     name: string;
     url: string;
     image_url: string;
+    height: number;
+    weight: number;
 };
 
 const HomeScreen = () => {
@@ -45,6 +47,8 @@ const HomeScreen = () => {
                         name: pokemon.name,
                         url: pokemon.url,
                         image_url: res.data.sprites.front_default,
+                        height: res.data.height,
+                        weight: res.data.weight,
                     };
                 }
             );
