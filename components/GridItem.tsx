@@ -14,10 +14,9 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                 flex: 1,
                 alignItems: "center",
                 marginHorizontal: 5,
-                shadowRadius: 10,
-                shadowColor: "#000",
-                shadowOpacity: 0.2,
-                shadowOffset: { height: 2, width: 2 },
+                borderWidth: 1,
+                borderColor: "rgba(255,255,255,0.50)",
+                // background color must be set
             }}
         >
             <View
@@ -26,11 +25,13 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                     width: "100%",
                     justifyContent: "center",
                     alignItems: "center",
+                    paddingVertical: 3,
                 }}
             >
                 <Text
                     style={{
                         fontWeight: "bold",
+                        color: "#F8F8FF",
                     }}
                 >
                     {category}
@@ -42,6 +43,7 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    paddingHorizontal: 5,
                 }}
             >
                 {image === true ? (
