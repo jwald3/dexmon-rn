@@ -14,6 +14,7 @@ const FlavorTextBox = ({ text }: FlavorTextProps) => {
                 marginHorizontal: 5,
                 borderWidth: 1,
                 borderColor: "rgba(255,255,255,0.50)",
+                borderRadius: 3,
             }}
         >
             <View
@@ -40,6 +41,7 @@ const FlavorTextBox = ({ text }: FlavorTextProps) => {
                     width: "100%",
                     paddingHorizontal: 10,
                     justifyContent: "center",
+                    backgroundColor: "rgba(255,255,255,0.10)",
                 }}
             >
                 <Text

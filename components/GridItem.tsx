@@ -16,6 +16,7 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                 marginHorizontal: 5,
                 borderWidth: 1,
                 borderColor: "rgba(255,255,255,0.50)",
+                borderRadius: 3,
                 // background color must be set
             }}
         >
@@ -43,7 +44,8 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    paddingHorizontal: 5,
+                    backgroundColor: "rgba(255,255,255,0.10)",
+                    width: "100%",
                 }}
             >
                 {image === true ? (
@@ -54,7 +56,9 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
                         />
                     </>
                 ) : (
-                    <Text style={{ color: "#fff" }}>{value}</Text>
+                    <Text style={{ color: "#fff", paddingHorizontal: 5 }}>
+                        {value}
+                    </Text>
                 )}
             </View>
         </View>
