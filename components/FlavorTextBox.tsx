@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import React from "react";
 
 interface FlavorTextProps {
@@ -6,6 +6,9 @@ interface FlavorTextProps {
 }
 
 const FlavorTextBox = ({ text }: FlavorTextProps) => {
+    const screenWidth = Dimensions.get("screen").width;
+    const gridRowMaxWidth = screenWidth * 0.9;
+
     return (
         <View
             style={{
@@ -15,6 +18,7 @@ const FlavorTextBox = ({ text }: FlavorTextProps) => {
                 borderWidth: 1,
                 borderColor: "rgba(255,255,255,0.50)",
                 borderRadius: 3,
+                width: gridRowMaxWidth,
             }}
         >
             <View

@@ -1,5 +1,7 @@
 import React from "react";
 import { View, Text, Image, Dimensions } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { capitalize } from "../typescript/functions";
 import GridItem from "./GridItem";
 
 type UpdatedPoke = {
@@ -52,37 +54,61 @@ const GridRow = ({ pokemon }: RowProps) => {
     const gridRowMaxWidth = screenWidth * 0.9;
 
     return (
+        // <View
+        //     style={{
+        //         width: gridRowMaxWidth,
+        //         height: 80,
+        //         flexDirection: "row",
+        //         justifyContent: "space-around",
+        //         marginLeft: "auto",
+        //         marginRight: "auto",
+        //     }}
+        // >
         <View
             style={{
-                width: gridRowMaxWidth,
-                height: 80,
-                flexDirection: "row",
-                justifyContent: "space-around",
+                justifyContent: "center",
+                minWidth: gridRowMaxWidth,
+                width: gridRowMaxWidth * 0.5,
                 marginLeft: "auto",
                 marginRight: "auto",
+                alignItems: "center",
             }}
         >
-            <GridItem
-                category={"Classification"}
-                value={pokemon.classification[0].genus}
-                image={false}
-            />
-            <GridItem
-                category={"Sprite"}
-                value={pokemon.image_url}
-                image={true}
-            />
-            <GridItem
-                category={"Height"}
-                value={`${pokemon.height / 10} m`}
-                image={false}
-            />
-            <GridItem
-                category={"Weight"}
-                value={`${pokemon.weight / 10} kg`}
-                image={false}
-            />
-            <GridItem category={"Type"} value={"Grass\nPoison"} image={false} />
+            <ScrollView
+                horizontal={true}
+                contentContainerStyle={{
+                    height: 80,
+                }}
+            >
+                <GridItem
+                    category={"Classification"}
+                    value={pokemon.classification[0].genus}
+                    image={false}
+                />
+                <GridItem
+                    category={"Sprite"}
+                    value={pokemon.image_url}
+                    image={true}
+                />
+                <GridItem
+                    category={"Height"}
+                    value={`${pokemon.height / 10} m`}
+                    image={false}
+                />
+                <GridItem
+                    category={"Weight"}
+                    value={`${pokemon.weight / 10} kg`}
+                    image={false}
+                />
+                <GridItem
+                    category={"Type"}
+                    value={pokemon.types
+                        .map((type) => type.type.name)
+                        .map((type) => capitalize(type))
+                        .join("\n")}
+                    image={false}
+                />
+            </ScrollView>
         </View>
     );
 };
