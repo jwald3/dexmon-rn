@@ -10,6 +10,7 @@ import PokemonType from "../components/PokemonType";
 import EStyleSheet from "react-native-extended-stylesheet";
 import GridRow from "../components/GridRow";
 import FlavorTextBox from "../components/FlavorTextBox";
+import BarChart from "../components/BarChartWrapper";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -155,6 +156,27 @@ const PokemonScreen = () => {
             >
                 <FlavorTextBox
                     text={updatedPokemon.flavor_text[0].flavor_text}
+                />
+            </View>
+            <View
+                style={{
+                    width: "100%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: 50,
+                    height: 215,
+                }}
+            >
+                <BarChart
+                    stats={[
+                        { name: "hp", value: 100 },
+                        { name: "atk", value: 150 },
+                        { name: "def", value: 50 },
+                        { name: "spa", value: 100 },
+                        { name: "spd", value: 20 },
+                        { name: "spe", value: 100 },
+                    ]}
+                    maxX={200}
                 />
             </View>
         </View>
