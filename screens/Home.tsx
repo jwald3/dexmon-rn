@@ -2,6 +2,7 @@ import { View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokedexItem from "../components/PokedexItem";
+import { StatusBar } from "expo-status-bar";
 
 type BasePokemonResponse = {
     name: string;

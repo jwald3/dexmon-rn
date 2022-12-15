@@ -5,6 +5,7 @@ import {
     StyleSheet,
     FlatList,
     ScrollView,
+    StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -60,6 +61,7 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="dark-content" />
             <ScrollView
                 contentContainerStyle={{
                     flexGrow: 1,

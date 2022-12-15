@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, StatusBar } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { UpdatedPokemonResponse } from "./Home";
@@ -119,6 +119,7 @@ const PokemonScreen = () => {
 
     return updatedPokemon ? (
         <View style={styles.container}>
+            <StatusBar barStyle={"dark-content"} hidden={false} />
             <View style={styles.header}>
                 <Text style={styles.title}>
                     {capitalize(updatedPokemon.name)}
