@@ -170,7 +170,7 @@ const PokemonScreen = () => {
                 <BarChart
                     stats={[
                         { name: "hp", value: 100 },
-                        { name: "atk", value: 150 },
+                        { name: "atk", value: 200 },
                         { name: "def", value: 50 },
                         { name: "spa", value: 100 },
                         { name: "spd", value: 20 },

@@ -62,35 +62,43 @@ const BarChart = (props: Props) => {
                             paddingRight: 5,
                         }}
                     >
-                        <Text style={{ color: "#f8f8ff" }}>{stat.name}:</Text>
-                        <View
-                            style={{
-                                marginLeft: 10,
-                                width: (stat.value / maxX) * 100 + "%",
-                                height: 20,
-                                backgroundColor: "#2980B9",
-                            }}
-                        >
-                            {stat.value > 50 && (
+                        <View style={{ width: 40 }}>
+                            <Text style={{ color: "#f8f8ff", marginRight: 10 }}>
+                                {stat.name}:
+                            </Text>
+                        </View>
+
+                        <View style={{ flex: 1, flexDirection: "row" }}>
+                            <View
+                                style={{
+                                    width: (stat.value / maxX) * 100 + "%",
+                                    height: 20,
+                                    backgroundColor: "#2980B9",
+                                }}
+                            >
+                                {stat.value > 50 && (
+                                    <Text
+                                        style={{
+                                            position: "absolute",
+                                            right: 10,
+                                            top: 0,
+                                            bottom: 0,
+                                            justifyContent: "center",
+                                            color: "#f8f8ff",
+                                        }}
+                                    >
+                                        {stat.value}
+                                    </Text>
+                                )}
+                            </View>
+                            {stat.value <= 50 && (
                                 <Text
-                                    style={{
-                                        position: "absolute",
-                                        right: 10,
-                                        top: 0,
-                                        bottom: 0,
-                                        justifyContent: "center",
-                                        color: "#f8f8ff",
-                                    }}
+                                    style={{ marginLeft: 10, color: "#f8f8ff" }}
                                 >
                                     {stat.value}
                                 </Text>
                             )}
                         </View>
-                        {stat.value <= 50 && (
-                            <Text style={{ marginLeft: 10, color: "#f8f8ff" }}>
-                                {stat.value}
-                            </Text>
-                        )}
                     </View>
                 ))}
             </View>
