@@ -11,6 +11,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import GridRow from "../components/GridRow";
 import FlavorTextBox from "../components/FlavorTextBox";
 import BarChart from "../components/BarChartWrapper";
+import { ScrollView } from "react-native-gesture-handler";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -119,67 +120,69 @@ const PokemonScreen = () => {
     }, []);
 
     return updatedPokemon ? (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.title}>
-                    {capitalize(updatedPokemon.name)}
-                </Text>
-                <View style={styles.imageContainer}>
-                    <View style={styles.circle}>
-                        <View style={styles.innerCircle} />
-                        <Image
-                            style={styles.image}
-                            source={{ uri: updatedPokemon.official_art }}
-                            resizeMode="contain"
-                        />
+        <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    <Text style={styles.title}>
+                        {capitalize(updatedPokemon.name)}
+                    </Text>
+                    <View style={styles.imageContainer}>
+                        <View style={styles.circle}>
+                            <View style={styles.innerCircle} />
+                            <Image
+                                style={styles.image}
+                                source={{ uri: updatedPokemon.official_art }}
+                                resizeMode="contain"
+                            />
+                        </View>
                     </View>
                 </View>
+                <View
+                    style={{
+                        width: "90%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                    }}
+                >
+                    <GridRow pokemon={updatedPokemon} />
+                </View>
+                <View
+                    style={{
+                        width: "90%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 50,
+                        minHeight: 75,
+                        height: 100,
+                    }}
+                >
+                    <FlavorTextBox
+                        text={updatedPokemon.flavor_text[0].flavor_text}
+                    />
+                </View>
+                <View
+                    style={{
+                        width: "100%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 50,
+                        height: 215,
+                    }}
+                >
+                    <BarChart
+                        stats={[
+                            { name: "hp", value: 100 },
+                            { name: "atk", value: 200 },
+                            { name: "def", value: 50 },
+                            { name: "spa", value: 100 },
+                            { name: "spd", value: 20 },
+                            { name: "spe", value: 100 },
+                        ]}
+                        maxX={200}
+                    />
+                </View>
             </View>
-            <View
-                style={{
-                    width: "90%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                }}
-            >
-                <GridRow pokemon={updatedPokemon} />
-            </View>
-            <View
-                style={{
-                    width: "90%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    marginTop: 50,
-                    minHeight: 75,
-                    height: 100,
-                }}
-            >
-                <FlavorTextBox
-                    text={updatedPokemon.flavor_text[0].flavor_text}
-                />
-            </View>
-            <View
-                style={{
-                    width: "100%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    marginTop: 50,
-                    height: 215,
-                }}
-            >
-                <BarChart
-                    stats={[
-                        { name: "hp", value: 100 },
-                        { name: "atk", value: 200 },
-                        { name: "def", value: 50 },
-                        { name: "spa", value: 100 },
-                        { name: "spd", value: 20 },
-                        { name: "spe", value: 100 },
-                    ]}
-                    maxX={200}
-                />
-            </View>
-        </View>
+        </ScrollView>
     ) : (
         <View></View>
     );
@@ -189,6 +192,7 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#383838",
+        paddingBottom: 60,
     },
     header: {
         alignItems: "center",
