@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 
 interface FlavorTextProps {
@@ -6,8 +6,6 @@ interface FlavorTextProps {
 }
 
 const FlavorTextBox = ({ text }: FlavorTextProps) => {
-    const screenWidth = Dimensions.get("screen").width;
-
     return (
         <View
             style={{
