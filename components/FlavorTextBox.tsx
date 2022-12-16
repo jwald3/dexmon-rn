@@ -7,7 +7,6 @@ interface FlavorTextProps {
 
 const FlavorTextBox = ({ text }: FlavorTextProps) => {
     const screenWidth = Dimensions.get("screen").width;
-    const gridRowMaxWidth = screenWidth * 0.9;
 
     return (
         <View
