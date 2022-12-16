@@ -170,14 +170,10 @@ const PokemonScreen = () => {
                     }}
                 >
                     <BarChart
-                        stats={[
-                            { name: "hp", value: 100 },
-                            { name: "atk", value: 200 },
-                            { name: "def", value: 50 },
-                            { name: "spa", value: 100 },
-                            { name: "spd", value: 20 },
-                            { name: "spe", value: 100 },
-                        ]}
+                        stats={pokemon.stats.map((stat) => ({
+                            name: stat.stat.name,
+                            value: stat.base_stat,
+                        }))}
                         maxX={200}
                     />
                 </View>

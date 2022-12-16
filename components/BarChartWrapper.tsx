@@ -14,6 +14,24 @@ interface Props {
 const BarChart = (props: Props) => {
     const { stats, maxX } = props;
 
+    const statAbbrevs = {
+        hp: "HP",
+        attack: "ATK",
+        defense: "DEF",
+        "special-attack": "SpA",
+        "special-defense": "SpD",
+        speed: "SPE",
+    };
+
+    const statColors = {
+        hp: "#FF5959",
+        attack: "#F5AC78",
+        defense: "#FAE078",
+        "special-attack": "#9DB7F5",
+        "special-defense": "#A7DB8D",
+        speed: "#FA92B2",
+    };
+
     return (
         <View
             style={{
@@ -62,9 +80,16 @@ const BarChart = (props: Props) => {
                             paddingRight: 5,
                         }}
                     >
-                        <View style={{ width: 40 }}>
+                        <View style={{ width: 100 }}>
                             <Text style={{ color: "#f8f8ff", marginRight: 10 }}>
-                                {stat.name}:
+                                {stat.name.replace(
+                                    stat.name,
+                                    (m) =>
+                                        statAbbrevs[
+                                            m as keyof typeof statAbbrevs
+                                        ]
+                                )}
+                                :
                             </Text>
                         </View>
 
@@ -73,7 +98,13 @@ const BarChart = (props: Props) => {
                                 style={{
                                     width: (stat.value / maxX) * 100 + "%",
                                     height: 20,
-                                    backgroundColor: "#2980B9",
+                                    backgroundColor: stat.name.replace(
+                                        stat.name,
+                                        (m) =>
+                                            statColors[
+                                                m as keyof typeof statColors
+                                            ]
+                                    ),
                                 }}
                             >
                                 {stat.value > 50 && (
@@ -84,7 +115,8 @@ const BarChart = (props: Props) => {
                                             top: 0,
                                             bottom: 0,
                                             justifyContent: "center",
-                                            color: "#f8f8ff",
+                                            color: " #16161d",
+                                            fontWeight: "bold",
                                         }}
                                     >
                                         {stat.value}
