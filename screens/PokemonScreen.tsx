@@ -142,6 +142,9 @@ const PokemonScreen = () => {
                         width: "90%",
                         marginLeft: "auto",
                         marginRight: "auto",
+                        marginTop: 0,
+                        minHeight: 75,
+                        height: 100,
                     }}
                 >
                     <GridRow pokemon={updatedPokemon} />
@@ -162,7 +165,7 @@ const PokemonScreen = () => {
                 </View>
                 <View
                     style={{
-                        width: "100%",
+                        width: "90%",
                         marginLeft: "auto",
                         marginRight: "auto",
                         marginTop: 50,

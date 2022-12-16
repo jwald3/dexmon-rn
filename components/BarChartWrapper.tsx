@@ -36,7 +36,7 @@ const BarChart = (props: Props) => {
         <View
             style={{
                 backgroundColor: "rgba(255,255,255,0.10)",
-                width: "90%",
+                width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
                 borderWidth: 1,

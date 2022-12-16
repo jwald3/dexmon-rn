@@ -66,18 +66,16 @@ const GridRow = ({ pokemon }: RowProps) => {
         // >
         <View
             style={{
-                justifyContent: "center",
-                minWidth: gridRowMaxWidth,
-                width: gridRowMaxWidth * 0.5,
+                width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
-                alignItems: "center",
             }}
         >
             <ScrollView
                 horizontal={true}
                 contentContainerStyle={{
-                    height: 80,
+                    height: 100,
+                    minWidth: gridRowMaxWidth,
                 }}
             >
                 <GridItem
