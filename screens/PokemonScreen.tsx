@@ -94,41 +94,6 @@ const PokemonScreen = () => {
 
     const [updatedPokemon, setUpdatedPokemon] = useState<UpdatedPoke>();
 
-    const data = {
-        chain: {
-            species: "Oddish",
-            image_url:
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png",
-            evolves_to: [
-                {
-                    species: "Gloom",
-                    image_url:
-                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
-                    evolves_to: [
-                        {
-                            species: "Vileplume",
-                            image_url:
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
-                            evolves_to: [],
-                        },
-                        {
-                            species: "Bellossom",
-                            image_url:
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
-                            evolves_to: [],
-                        },
-                    ],
-                },
-            ],
-        },
-    };
-
-    const fetchEvoChain = async (url: string) => {
-        const response = await axios.get(url);
-
-        return response;
-    };
-
     useEffect(() => {
         axios
             .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
@@ -188,8 +153,6 @@ const PokemonScreen = () => {
                 });
             });
     }, []);
-
-    console.log(updatedPokemon);
 
     return updatedPokemon ? (
         <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { UpdatedPokemonResponse } from "../screens/Home";
 import { ChevronRightIcon } from "react-native-heroicons/outline";

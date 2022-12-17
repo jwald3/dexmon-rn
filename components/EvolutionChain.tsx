@@ -37,12 +37,6 @@ interface Props {
 }
 
 const EvolutionChain: React.FC<Props> = ({ chain }) => {
-    function axiosTest(url: string) {
-        return axios
-            .get(url)
-            .then((response) => response.data.sprites.front_default);
-    }
-
     const data = useMemo(() => {
         const flattenChain = (
             chain: Props["chain"]["evolves_to"],
@@ -108,7 +102,6 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                     data={data}
                     renderItem={({ item, index }) => {
                         const nextItem = data[index + 1];
-
                         return (
                             <View
                                 style={{

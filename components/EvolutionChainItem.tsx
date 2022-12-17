@@ -1,7 +1,10 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
+import { UpdatedPokemonResponse } from "../screens/Home";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 interface EvoItems {
     item: {
@@ -10,8 +13,21 @@ interface EvoItems {
     };
 }
 
+export type RootStackParamList = {
+    Pokemon: {
+        pokemon: UpdatedPokemonResponse;
+    };
+};
+
 const EvolutionChainItem = ({ item }: EvoItems) => {
     const [imageUrl, setImageUrl] = useState("");
+
+    const screenWidth = Dimensions.get("screen").width;
+
+    const navigation =
+        useNavigation<
+            NativeStackNavigationProp<RootStackParamList, "Pokemon">
+        >();
 
     useLayoutEffect(() => {
         axios
@@ -22,12 +38,14 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
     console.log(imageUrl);
 
     return imageUrl !== "" ? (
-        <View
+        <TouchableOpacity
             style={{
                 alignItems: "center",
                 marginHorizontal: 5,
                 flex: 1,
+                minWidth: screenWidth / 5,
             }}
+            // onPress={() => navigation.navigate("Pokemon", {})}
         >
             <Image
                 style={{
@@ -44,7 +62,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
             >
                 {capitalize(item.name)}
             </Text>
-        </View>
+        </TouchableOpacity>
     ) : (
         <View></View>
     );
