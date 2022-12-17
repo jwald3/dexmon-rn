@@ -1,15 +1,19 @@
 import React, { useMemo } from "react";
-import { View, Text, Dimensions, FlatList } from "react-native";
+import { View, Text, Dimensions, FlatList, Image } from "react-native";
 
 interface Props {
     chain: {
         species: string;
+        image_url: string;
         evolves_to: Array<{
             species: string;
+            image_url: string;
             evolves_to: Array<{
                 species: string;
+                image_url: string;
                 evolves_to: Array<{
                     species: string;
+                    image_url: string;
                     evolves_to: [];
                 }>;
             }>;
@@ -26,6 +30,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
         ): Array<{
             species: string;
             evolves_to: Array<any>;
+            image_url: string;
         }> => {
             return chain.flatMap((evolution) => [
                 evolution,
@@ -86,15 +91,15 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                                 display: "flex",
                             }}
                         >
-                            <Text
+                            <Image
                                 style={{
-                                    textAlign: "center",
-                                    textAlignVertical: "center",
-                                    color: "#f8f8ff",
-                                    marginLeft: "auto",
-                                    marginRight: "auto",
+                                    width: 100,
+                                    height: 100,
                                 }}
-                            >
+                                source={{ uri: item.image_url }}
+                                resizeMode="contain"
+                            />
+                            <Text style={{ color: "#f8f8ff" }}>
                                 {item.species}
                             </Text>
                         </View>
