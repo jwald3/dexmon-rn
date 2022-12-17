@@ -80,7 +80,7 @@ const BarChart = (props: Props) => {
                             paddingRight: 5,
                         }}
                     >
-                        <View style={{ width: 100 }}>
+                        <View style={{ width: 50 }}>
                             <Text style={{ color: "#f8f8ff", marginRight: 10 }}>
                                 {stat.name.replace(
                                     stat.name,
@@ -96,7 +96,11 @@ const BarChart = (props: Props) => {
                         <View style={{ flex: 1, flexDirection: "row" }}>
                             <View
                                 style={{
-                                    width: (stat.value / maxX) * 100 + "%",
+                                    width:
+                                        Math.min(
+                                            (stat.value / maxX) * 100,
+                                            100
+                                        ) + "%",
                                     height: 20,
                                     backgroundColor: stat.name.replace(
                                         stat.name,
@@ -107,7 +111,7 @@ const BarChart = (props: Props) => {
                                     ),
                                 }}
                             >
-                                {stat.value > 50 && (
+                                {stat.value >= 20 && (
                                     <Text
                                         style={{
                                             position: "absolute",
@@ -115,7 +119,7 @@ const BarChart = (props: Props) => {
                                             top: 0,
                                             bottom: 0,
                                             justifyContent: "center",
-                                            color: " #16161d",
+                                            color: "#16161d",
                                             fontWeight: "bold",
                                         }}
                                     >
@@ -123,9 +127,13 @@ const BarChart = (props: Props) => {
                                     </Text>
                                 )}
                             </View>
-                            {stat.value <= 50 && (
+                            {stat.value < 20 && (
                                 <Text
-                                    style={{ marginLeft: 10, color: "#f8f8ff" }}
+                                    style={{
+                                        marginLeft: 10,
+                                        color: "#f8f8ff",
+                                        fontWeight: "bold",
+                                    }}
                                 >
                                     {stat.value}
                                 </Text>

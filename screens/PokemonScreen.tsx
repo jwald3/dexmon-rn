@@ -1,17 +1,15 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { View, Text, Image } from "react-native";
+import { useRoute, RouteProp } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { UpdatedPokemonResponse } from "./Home";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { LinearGradient } from "expo-linear-gradient";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
-import PokemonType from "../components/PokemonType";
 import EStyleSheet from "react-native-extended-stylesheet";
 import GridRow from "../components/GridRow";
 import FlavorTextBox from "../components/FlavorTextBox";
 import BarChart from "../components/BarChartWrapper";
 import { ScrollView } from "react-native-gesture-handler";
+import EvolutionChain from "../components/EvolutionChain";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -67,7 +65,22 @@ const PokemonScreen = () => {
 
     const [updatedPokemon, setUpdatedPokemon] = useState<UpdatedPoke>();
 
-    console.log(updatedPokemon);
+    const data = {
+        chain: {
+            species: "Bulbasaur",
+            evolves_to: [
+                {
+                    species: "Ivysaur",
+                    evolves_to: [
+                        {
+                            species: "Venusaur",
+                            evolves_to: [],
+                        },
+                    ],
+                },
+            ],
+        },
+    };
 
     useEffect(() => {
         axios
@@ -162,6 +175,17 @@ const PokemonScreen = () => {
                     <FlavorTextBox
                         text={updatedPokemon.flavor_text[0].flavor_text}
                     />
+                </View>
+                <View
+                    style={{
+                        width: "90%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 50,
+                        height: 215,
+                    }}
+                >
+                    <EvolutionChain chain={data.chain} />
                 </View>
                 <View
                     style={{
