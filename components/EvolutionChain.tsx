@@ -26,19 +26,21 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
 
     const data = useMemo(() => {
         const flattenChain = (
-            chain: Props["chain"]["evolves_to"]
+            chain: Props["chain"]["evolves_to"],
+            level: number
         ): Array<{
             species: string;
             evolves_to: Array<any>;
             image_url: string;
+            level: number;
         }> => {
             return chain.flatMap((evolution) => [
-                evolution,
-                ...flattenChain(evolution.evolves_to),
+                { ...evolution, level },
+                ...flattenChain(evolution.evolves_to, level + 1),
             ]);
         };
 
-        return [chain, ...flattenChain(chain.evolves_to)];
+        return [{ ...chain, level: 0 }, ...flattenChain(chain.evolves_to, 1)];
     }, [chain.evolves_to]);
 
     return (
@@ -81,36 +83,74 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
             >
                 <FlatList
                     data={data}
-                    renderItem={({ item }) => (
-                        <View
-                            style={{
-                                width: (screenWidth * 0.9) / data.length - 20,
-                                height: "100%",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                display: "flex",
-                            }}
-                        >
-                            <Image
+                    renderItem={({ item, index }) => {
+                        const nextItem = data[index + 1];
+                        return (
+                            <View
                                 style={{
-                                    width: 100,
-                                    height: 100,
+                                    flex: 1,
+                                    height: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "space-around",
+                                    display: "flex",
+                                    flexDirection: "row",
                                 }}
-                                source={{ uri: item.image_url }}
-                                resizeMode="contain"
-                            />
-                            <Text style={{ color: "#f8f8ff" }}>
-                                {item.species}
-                            </Text>
-                        </View>
-                    )}
-                    keyExtractor={(item) => item.species}
-                    contentContainerStyle={{
-                        flexDirection: "row",
-                        width: "100%",
-                        height: "100%",
-                        justifyContent: "space-between",
+                            >
+                                <View
+                                    style={{
+                                        alignItems: "center",
+                                        marginHorizontal: 5,
+                                        flex: 1,
+                                    }}
+                                >
+                                    <Image
+                                        style={{
+                                            width: 75,
+                                            height: 75,
+                                        }}
+                                        source={{ uri: item.image_url }}
+                                    />
+                                    <Text
+                                        style={{
+                                            color: "#F8F8FF",
+                                            fontSize: 12,
+                                        }}
+                                    >
+                                        {item.species}
+                                    </Text>
+                                </View>
+                                {nextItem && nextItem.level === item.level && (
+                                    <Text
+                                        style={{
+                                            color: "#F8F8FF",
+                                            fontSize: 20,
+                                        }}
+                                    >
+                                        OR
+                                    </Text>
+                                )}
+                                {nextItem && nextItem.level > item.level && (
+                                    <View
+                                        style={{
+                                            width: 15,
+                                            height: 15,
+                                            borderTopWidth: 2,
+                                            borderRightWidth: 2,
+                                            borderColor: "#F8F8FF",
+                                            transform: [
+                                                {
+                                                    rotate: "45deg",
+                                                },
+                                            ],
+                                        }}
+                                    />
+                                )}
+                            </View>
+                        );
                     }}
+                    keyExtractor={(item) => item.species}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
                 />
             </View>
         </View>

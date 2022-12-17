@@ -67,19 +67,31 @@ const PokemonScreen = () => {
 
     const data = {
         chain: {
-            species: "Bulbasaur",
+            species: "Oddish",
             image_url:
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png",
             evolves_to: [
                 {
-                    species: "Ivysaur",
+                    species: "Gloom",
                     image_url:
-                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
                     evolves_to: [
                         {
-                            species: "Venusaur",
+                            species: "Vileplume",
                             image_url:
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
+                            evolves_to: [],
+                        },
+                        {
+                            species: "Bellossom",
+                            image_url:
+                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
+                            evolves_to: [],
+                        },
+                        {
+                            species: "Bellossom",
+                            image_url:
+                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
                             evolves_to: [],
                         },
                     ],
