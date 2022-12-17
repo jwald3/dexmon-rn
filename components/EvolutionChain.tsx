@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { useMemo } from "react";
 import { View, Text, Dimensions, FlatList, Image } from "react-native";
+import { capitalize } from "../typescript/functions";
+import EvolutionChainItem from "./EvolutionChainItem";
 
 interface Props {
     chain: {
@@ -34,6 +37,12 @@ interface Props {
 }
 
 const EvolutionChain: React.FC<Props> = ({ chain }) => {
+    function axiosTest(url: string) {
+        return axios
+            .get(url)
+            .then((response) => response.data.sprites.front_default);
+    }
+
     const data = useMemo(() => {
         const flattenChain = (
             chain: Props["chain"]["evolves_to"],
@@ -99,6 +108,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                     data={data}
                     renderItem={({ item, index }) => {
                         const nextItem = data[index + 1];
+
                         return (
                             <View
                                 style={{
@@ -110,29 +120,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                                     flexDirection: "row",
                                 }}
                             >
-                                <View
-                                    style={{
-                                        alignItems: "center",
-                                        marginHorizontal: 5,
-                                        flex: 1,
-                                    }}
-                                >
-                                    <Image
-                                        style={{
-                                            width: 75,
-                                            height: 75,
-                                        }}
-                                        source={{ uri: item.image_url }}
-                                    />
-                                    <Text
-                                        style={{
-                                            color: "#F8F8FF",
-                                            fontSize: 12,
-                                        }}
-                                    >
-                                        {item.species.name}
-                                    </Text>
-                                </View>
+                                <EvolutionChainItem item={item.species} />
                                 {nextItem && nextItem.level === item.level && (
                                     <Text
                                         style={{
