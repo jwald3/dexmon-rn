@@ -88,12 +88,6 @@ const PokemonScreen = () => {
                                 "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
                             evolves_to: [],
                         },
-                        {
-                            species: "Bellossom",
-                            image_url:
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
-                            evolves_to: [],
-                        },
                     ],
                 },
             ],

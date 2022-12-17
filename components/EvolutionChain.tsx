@@ -77,6 +77,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                 style={{
                     flex: 1,
                     width: "100%",
+                    alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "rgba(255,255,255,0.10)",
                 }}
