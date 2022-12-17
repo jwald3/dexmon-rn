@@ -3,16 +3,28 @@ import { View, Text, Dimensions, FlatList, Image } from "react-native";
 
 interface Props {
     chain: {
-        species: string;
+        species: {
+            name: string;
+            url: string;
+        };
         image_url: string;
         evolves_to: Array<{
-            species: string;
+            species: {
+                name: string;
+                url: string;
+            };
             image_url: string;
             evolves_to: Array<{
-                species: string;
+                species: {
+                    name: string;
+                    url: string;
+                };
                 image_url: string;
                 evolves_to: Array<{
-                    species: string;
+                    species: {
+                        name: string;
+                        url: string;
+                    };
                     image_url: string;
                     evolves_to: [];
                 }>;
@@ -22,14 +34,15 @@ interface Props {
 }
 
 const EvolutionChain: React.FC<Props> = ({ chain }) => {
-    const screenWidth = Dimensions.get("window").width;
-
     const data = useMemo(() => {
         const flattenChain = (
             chain: Props["chain"]["evolves_to"],
             level: number
         ): Array<{
-            species: string;
+            species: {
+                name: string;
+                url: string;
+            };
             evolves_to: Array<any>;
             image_url: string;
             level: number;
@@ -117,7 +130,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                                             fontSize: 12,
                                         }}
                                     >
-                                        {item.species}
+                                        {item.species.name}
                                     </Text>
                                 </View>
                                 {nextItem && nextItem.level === item.level && (
@@ -149,7 +162,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                             </View>
                         );
                     }}
-                    keyExtractor={(item) => item.species}
+                    keyExtractor={(item) => item.species.name}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 />

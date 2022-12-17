@@ -56,6 +56,35 @@ type UpdatedPoke = {
     }>;
     height: number;
     weight: number;
+    chain: {
+        species: {
+            name: string;
+            url: string;
+        };
+        image_url: string;
+        evolves_to: Array<{
+            species: {
+                name: string;
+                url: string;
+            };
+            image_url: string;
+            evolves_to: Array<{
+                species: {
+                    name: string;
+                    url: string;
+                };
+                image_url: string;
+                evolves_to: Array<{
+                    species: {
+                        name: string;
+                        url: string;
+                    };
+                    image_url: string;
+                    evolves_to: [];
+                }>;
+            }>;
+        }>;
+    };
 };
 
 const PokemonScreen = () => {
@@ -94,6 +123,12 @@ const PokemonScreen = () => {
         },
     };
 
+    const fetchEvoChain = async (url: string) => {
+        const response = await axios.get(url);
+
+        return response;
+    };
+
     useEffect(() => {
         axios
             .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
@@ -110,6 +145,7 @@ const PokemonScreen = () => {
                     flavor_text: data.data.flavor_text_entries,
                     height: pokemon.height,
                     weight: pokemon.weight,
+                    chain: data.data.evolution_chain,
                 };
 
                 const filteredClassification = updatePoke.classification.filter(
@@ -126,23 +162,34 @@ const PokemonScreen = () => {
                     }) => text.language.name === "en"
                 );
 
-                const newPoke = {
-                    name: updatePoke.name,
-                    url: updatePoke.url,
-                    image_url: updatePoke.image_url,
-                    id: updatePoke.id,
-                    types: updatePoke.types,
-                    stats: updatePoke.stats,
-                    official_art: updatePoke.official_art,
-                    classification: filteredClassification,
-                    flavor_text: filteredText,
-                    height: updatePoke.height,
-                    weight: updatePoke.weight,
-                };
+                // Handle the promise returned by the Axios call
+                axios.get(updatePoke.chain.url).then((data) => {
+                    // Update the evolution_chain property with the data returned by the Axios call
+                    updatePoke.chain = data.data.chain;
 
-                setUpdatedPokemon(newPoke);
+                    // Create the newPoke object with the updated evolution_chain property
+                    const newPoke = {
+                        name: updatePoke.name,
+                        url: updatePoke.url,
+                        image_url: updatePoke.image_url,
+                        id: updatePoke.id,
+                        types: updatePoke.types,
+                        stats: updatePoke.stats,
+                        official_art: updatePoke.official_art,
+                        classification: filteredClassification,
+                        flavor_text: filteredText,
+                        height: updatePoke.height,
+                        weight: updatePoke.weight,
+                        chain: updatePoke.chain,
+                    };
+
+                    // Set the updatedPokemon state with the newPoke object
+                    setUpdatedPokemon(newPoke);
+                });
             });
     }, []);
+
+    console.log(updatedPokemon);
 
     return updatedPokemon ? (
         <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>
@@ -197,7 +244,7 @@ const PokemonScreen = () => {
                         height: 215,
                     }}
                 >
-                    <EvolutionChain chain={data.chain} />
+                    <EvolutionChain chain={updatedPokemon.chain} />
                 </View>
                 <View
                     style={{
