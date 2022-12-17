@@ -43,7 +43,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
                 alignItems: "center",
                 marginHorizontal: 5,
                 flex: 1,
-                minWidth: screenWidth / 5,
+                minWidth: Math.min(screenWidth / 10, 85),
             }}
             // onPress={() => navigation.navigate("Pokemon", {})}
         >

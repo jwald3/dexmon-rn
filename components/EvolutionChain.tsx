@@ -1,6 +1,14 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { View, Text, Dimensions, FlatList, Image } from "react-native";
+import {
+    View,
+    Text,
+    Dimensions,
+    FlatList,
+    Image,
+    Platform,
+    ScrollView,
+} from "react-native";
 import { capitalize } from "../typescript/functions";
 import EvolutionChainItem from "./EvolutionChainItem";
 
@@ -96,6 +104,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "rgba(255,255,255,0.10)",
+                    overflow: "hidden",
                 }}
             >
                 <FlatList
@@ -145,7 +154,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
                     }}
                     keyExtractor={(item) => item.species.name}
                     horizontal
-                    showsHorizontalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={true}
                 />
             </View>
         </View>
