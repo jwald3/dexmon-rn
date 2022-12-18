@@ -44,6 +44,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
                 marginHorizontal: 5,
                 flex: 1,
                 minWidth: Math.min(screenWidth / 10, 85),
+                padding: 10,
             }}
             onPress={() =>
                 navigation.push("Poke", { pokemon: { name: item.name } })
