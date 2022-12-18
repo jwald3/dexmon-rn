@@ -37,8 +37,6 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
             .then((data) => setImageUrl(data.data.sprites.front_default));
     }, []);
 
-    console.log(imageUrl);
-
     return imageUrl !== "" ? (
         <TouchableOpacity
             style={{

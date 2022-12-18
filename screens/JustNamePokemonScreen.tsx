@@ -207,8 +207,6 @@ const JustNamePokemonScreen = () => {
                 });
     }, [updatedPokemon]);
 
-    console.log(fullPokemonObj);
-
     return fullPokemonObj ? (
         <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>
             <View style={styles.container}>

@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import PokemonScreen from "./screens/PokemonScreen";
 import Home from "./screens/Home";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { StatusBar } from "react-native";
+import { Button, StatusBar, Text } from "react-native";
 import JustNamePokemonScreen from "./screens/JustNamePokemonScreen";
 
 const Stack = createNativeStackNavigator();
