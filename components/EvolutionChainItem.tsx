@@ -48,7 +48,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
                 minWidth: Math.min(screenWidth / 10, 85),
             }}
             onPress={() =>
-                navigation.navigate("Poke", { pokemon: { name: item.name } })
+                navigation.push("Poke", { pokemon: { name: item.name } })
             }
         >
             <Image
