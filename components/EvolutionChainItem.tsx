@@ -13,9 +13,13 @@ interface EvoItems {
     };
 }
 
+export interface PokemonResponse {
+    name: string;
+}
+
 export type RootStackParamList = {
-    Pokemon: {
-        pokemon: UpdatedPokemonResponse;
+    Poke: {
+        pokemon: PokemonResponse;
     };
 };
 
@@ -25,9 +29,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
     const screenWidth = Dimensions.get("screen").width;
 
     const navigation =
-        useNavigation<
-            NativeStackNavigationProp<RootStackParamList, "Pokemon">
-        >();
+        useNavigation<NativeStackNavigationProp<RootStackParamList, "Poke">>();
 
     useLayoutEffect(() => {
         axios
@@ -45,7 +47,9 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
                 flex: 1,
                 minWidth: Math.min(screenWidth / 10, 85),
             }}
-            // onPress={() => navigation.navigate("Pokemon", {})}
+            onPress={() =>
+                navigation.navigate("Poke", { pokemon: { name: item.name } })
+            }
         >
             <Image
                 style={{

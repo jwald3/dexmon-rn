@@ -4,6 +4,7 @@ import PokemonScreen from "./screens/PokemonScreen";
 import Home from "./screens/Home";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { StatusBar } from "react-native";
+import JustNamePokemonScreen from "./screens/JustNamePokemonScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,19 @@ export default function App() {
                 <Stack.Screen
                     name="Pokemon"
                     component={PokemonScreen}
+                    options={{
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            color: "#fff",
+                        },
+                        headerStyle: {
+                            backgroundColor: "#42AD4A",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="Poke"
+                    component={JustNamePokemonScreen}
                     options={{
                         headerTintColor: "#fff",
                         headerTitleStyle: {
