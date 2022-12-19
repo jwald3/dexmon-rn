@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import EStyleSheet from "react-native-extended-stylesheet";
 import { Button, StatusBar, Text } from "react-native";
 import JustNamePokemonScreen from "./screens/JustNamePokemonScreen";
+import PokemonSearch from "./screens/PokemonSearch";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,11 @@ export default function App() {
                 <Stack.Screen
                     name="Poke"
                     component={JustNamePokemonScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Search"
+                    component={PokemonSearch}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

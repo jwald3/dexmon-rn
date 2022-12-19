@@ -24,6 +24,9 @@ export type RootStackParamList = {
     Home: {
         Home: string;
     };
+    Search: {
+        Search: string;
+    };
 };
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -70,7 +73,12 @@ const Header: React.FC<HeaderProps> = (props) => {
                 >
                     {props.title}
                 </Text>
-                <TouchableOpacity style={{ width: 50 }}>
+                <TouchableOpacity
+                    style={{ width: 50 }}
+                    onPress={() =>
+                        navigation.navigate("Search", { Search: "" })
+                    }
+                >
                     <MagnifyingGlassIcon size={24} color="#fff" />
                 </TouchableOpacity>
             </View>
