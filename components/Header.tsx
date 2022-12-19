@@ -9,7 +9,11 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ChevronLeftIcon } from "react-native-heroicons/outline";
+import {
+    ChevronLeftIcon,
+    MagnifyingGlassCircleIcon,
+    MagnifyingGlassIcon,
+} from "react-native-heroicons/outline";
 
 interface HeaderProps {
     title: string;
@@ -66,7 +70,9 @@ const Header: React.FC<HeaderProps> = (props) => {
                 >
                     {props.title}
                 </Text>
-                <View style={{ width: 50 }}></View>
+                <TouchableOpacity style={{ width: 50 }}>
+                    <MagnifyingGlassIcon size={24} color="#fff" />
+                </TouchableOpacity>
             </View>
         </View>
     );
