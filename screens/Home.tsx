@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokedexItem from "../components/PokedexItem";
 import { StatusBar } from "expo-status-bar";
+import Header from "../components/Header";
 
 type BasePokemonResponse = {
     name: string;
@@ -105,6 +106,7 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
+            <Header title="Dexmon" showBackButton={false} />
             <FlatList
                 data={updatedPokemonList}
                 initialNumToRender={20}

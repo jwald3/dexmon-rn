@@ -17,42 +17,17 @@ export default function App() {
                 <Stack.Screen
                     name="Home"
                     component={Home}
-                    options={{
-                        title: "Dexmon",
-                        headerTitleStyle: {
-                            color: "#fff",
-                        },
-                        headerTintColor: "#fff",
-                        headerStyle: {
-                            backgroundColor: "#42AD4A",
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name="Pokemon"
                     component={PokemonScreen}
-                    options={{
-                        headerTintColor: "#fff",
-                        headerTitleStyle: {
-                            color: "#fff",
-                        },
-                        headerStyle: {
-                            backgroundColor: "#42AD4A",
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name="Poke"
                     component={JustNamePokemonScreen}
-                    options={{
-                        headerTintColor: "#fff",
-                        headerTitleStyle: {
-                            color: "#fff",
-                        },
-                        headerStyle: {
-                            backgroundColor: "#42AD4A",
-                        },
-                    }}
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

@@ -10,6 +10,7 @@ import EvolutionChain from "../components/EvolutionChain";
 import BarChart from "../components/BarChartWrapper";
 import GridRow from "../components/GridRow";
 import EStyleSheet from "react-native-extended-stylesheet";
+import Header from "../components/Header";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -208,79 +209,86 @@ const JustNamePokemonScreen = () => {
     }, [updatedPokemon]);
 
     return fullPokemonObj ? (
-        <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>
-                        {capitalize(fullPokemonObj.name)}
-                    </Text>
-                    <View style={styles.imageContainer}>
-                        <View style={styles.circle}>
-                            <View style={styles.innerCircle} />
-                            <Image
-                                style={styles.image}
-                                source={{ uri: fullPokemonObj.official_art }}
-                                resizeMode="contain"
-                            />
+        <View>
+            <Header title="Pokemon" showBackButton={true} />
+            <ScrollView
+                style={{ backgroundColor: "#383838", paddingVertical: 30 }}
+            >
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <Text style={styles.title}>
+                            {capitalize(fullPokemonObj.name)}
+                        </Text>
+                        <View style={styles.imageContainer}>
+                            <View style={styles.circle}>
+                                <View style={styles.innerCircle} />
+                                <Image
+                                    style={styles.image}
+                                    source={{
+                                        uri: fullPokemonObj.official_art,
+                                    }}
+                                    resizeMode="contain"
+                                />
+                            </View>
                         </View>
                     </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 0,
+                            minHeight: 75,
+                            height: 100,
+                        }}
+                    >
+                        <GridRow pokemon={fullPokemonObj} />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            minHeight: 75,
+                            height: 100,
+                        }}
+                    >
+                        <FlavorTextBox
+                            text={fullPokemonObj.flavor_text[0].flavor_text}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            height: 215,
+                        }}
+                    >
+                        <EvolutionChain chain={fullPokemonObj.chain} />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            height: 215,
+                        }}
+                    >
+                        <BarChart
+                            stats={fullPokemonObj.stats.map((stat) => ({
+                                name: stat.stat.name,
+                                value: stat.base_stat,
+                            }))}
+                            maxX={200}
+                        />
+                    </View>
                 </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 0,
-                        minHeight: 75,
-                        height: 100,
-                    }}
-                >
-                    <GridRow pokemon={fullPokemonObj} />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        minHeight: 75,
-                        height: 100,
-                    }}
-                >
-                    <FlavorTextBox
-                        text={fullPokemonObj.flavor_text[0].flavor_text}
-                    />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        height: 215,
-                    }}
-                >
-                    <EvolutionChain chain={fullPokemonObj.chain} />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        height: 215,
-                    }}
-                >
-                    <BarChart
-                        stats={fullPokemonObj.stats.map((stat) => ({
-                            name: stat.stat.name,
-                            value: stat.base_stat,
-                        }))}
-                        maxX={200}
-                    />
-                </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     ) : (
         <View></View>
     );

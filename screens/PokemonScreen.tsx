@@ -10,6 +10,7 @@ import FlavorTextBox from "../components/FlavorTextBox";
 import BarChart from "../components/BarChartWrapper";
 import { ScrollView } from "react-native-gesture-handler";
 import EvolutionChain from "../components/EvolutionChain";
+import Header from "../components/Header";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -155,79 +156,86 @@ const PokemonScreen = () => {
     }, []);
 
     return updatedPokemon ? (
-        <ScrollView style={{ backgroundColor: "#383838", paddingVertical: 30 }}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.title}>
-                        {capitalize(updatedPokemon.name)}
-                    </Text>
-                    <View style={styles.imageContainer}>
-                        <View style={styles.circle}>
-                            <View style={styles.innerCircle} />
-                            <Image
-                                style={styles.image}
-                                source={{ uri: updatedPokemon.official_art }}
-                                resizeMode="contain"
-                            />
+        <View>
+            <Header title="Pokemon" showBackButton={true} />
+            <ScrollView
+                style={{ backgroundColor: "#383838", paddingVertical: 30 }}
+            >
+                <View style={styles.container}>
+                    <View style={styles.header}>
+                        <Text style={styles.title}>
+                            {capitalize(updatedPokemon.name)}
+                        </Text>
+                        <View style={styles.imageContainer}>
+                            <View style={styles.circle}>
+                                <View style={styles.innerCircle} />
+                                <Image
+                                    style={styles.image}
+                                    source={{
+                                        uri: updatedPokemon.official_art,
+                                    }}
+                                    resizeMode="contain"
+                                />
+                            </View>
                         </View>
                     </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 0,
+                            minHeight: 75,
+                            height: 100,
+                        }}
+                    >
+                        <GridRow pokemon={updatedPokemon} />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            minHeight: 75,
+                            height: 100,
+                        }}
+                    >
+                        <FlavorTextBox
+                            text={updatedPokemon.flavor_text[0].flavor_text}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            height: 215,
+                        }}
+                    >
+                        <EvolutionChain chain={updatedPokemon.chain} />
+                    </View>
+                    <View
+                        style={{
+                            width: "90%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginTop: 50,
+                            height: 215,
+                        }}
+                    >
+                        <BarChart
+                            stats={pokemon.stats.map((stat) => ({
+                                name: stat.stat.name,
+                                value: stat.base_stat,
+                            }))}
+                            maxX={200}
+                        />
+                    </View>
                 </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 0,
-                        minHeight: 75,
-                        height: 100,
-                    }}
-                >
-                    <GridRow pokemon={updatedPokemon} />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        minHeight: 75,
-                        height: 100,
-                    }}
-                >
-                    <FlavorTextBox
-                        text={updatedPokemon.flavor_text[0].flavor_text}
-                    />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        height: 215,
-                    }}
-                >
-                    <EvolutionChain chain={updatedPokemon.chain} />
-                </View>
-                <View
-                    style={{
-                        width: "90%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 50,
-                        height: 215,
-                    }}
-                >
-                    <BarChart
-                        stats={pokemon.stats.map((stat) => ({
-                            name: stat.stat.name,
-                            value: stat.base_stat,
-                        }))}
-                        maxX={200}
-                    />
-                </View>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     ) : (
         <View></View>
     );
