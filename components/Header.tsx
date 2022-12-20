@@ -5,13 +5,12 @@ import {
     TouchableOpacity,
     StatusBar,
     StyleSheet,
-    Platform,
+    Keyboard,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
     ChevronLeftIcon,
-    MagnifyingGlassCircleIcon,
     MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
 
