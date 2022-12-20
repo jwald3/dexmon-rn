@@ -157,7 +157,11 @@ const PokemonScreen = () => {
 
     return updatedPokemon ? (
         <View>
-            <Header title="Pokemon" showBackButton={true} />
+            <Header
+                title="Pokemon"
+                showBackButton={true}
+                showSearchButton={true}
+            />
             <ScrollView
                 style={{ backgroundColor: "#383838", paddingVertical: 30 }}
             >

@@ -18,6 +18,7 @@ import {
 interface HeaderProps {
     title: string;
     showBackButton: boolean;
+    showSearchButton: boolean;
 }
 
 export type RootStackParamList = {
@@ -39,7 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             <View style={styles.container}>
                 {props.showBackButton ? (
                     <TouchableOpacity
-                        style={{ width: 50 }}
+                        style={{ width: 50, marginLeft: 20 }}
                         onPress={() =>
                             navigation.navigate("Home", { Home: "" })
                         }
@@ -73,14 +74,29 @@ const Header: React.FC<HeaderProps> = (props) => {
                 >
                     {props.title}
                 </Text>
-                <TouchableOpacity
-                    style={{ width: 50 }}
-                    onPress={() =>
-                        navigation.navigate("Search", { Search: "" })
-                    }
-                >
-                    <MagnifyingGlassIcon size={24} color="#fff" />
-                </TouchableOpacity>
+                {props.showSearchButton ? (
+                    <TouchableOpacity
+                        style={{
+                            width: 50,
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-end",
+                            marginRight: 20,
+                        }}
+                        onPress={() =>
+                            navigation.navigate("Search", { Search: "" })
+                        }
+                    >
+                        <MagnifyingGlassIcon
+                            size={24}
+                            color="#fff"
+                            style={{ paddingLeft: "auto" }}
+                        />
+                    </TouchableOpacity>
+                ) : (
+                    <View style={{ width: 50 }}></View>
+                )}
             </View>
         </View>
     );

@@ -84,7 +84,11 @@ const PokemonSearch = () => {
 
     return (
         <View style={{ backgroundColor: "#383838", flex: 1 }}>
-            <Header title="Search Pokemon" showBackButton={true} />
+            <Header
+                title="Search Pokemon"
+                showBackButton={true}
+                showSearchButton={false}
+            />
             <View>
                 <View style={{ backgroundColor: "#42AD4A" }}>
                     <View

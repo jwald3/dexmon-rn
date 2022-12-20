@@ -106,7 +106,11 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-            <Header title="Dexmon" showBackButton={false} />
+            <Header
+                title="Dexmon"
+                showBackButton={false}
+                showSearchButton={true}
+            />
             <FlatList
                 data={updatedPokemonList}
                 initialNumToRender={20}
