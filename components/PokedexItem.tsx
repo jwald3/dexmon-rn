@@ -11,21 +11,23 @@ interface PokedexItemProps {
     pokemon: UpdatedPokemonResponse;
 }
 
+export interface PokemonResponse {
+    name: string;
+}
+
 export type RootStackParamList = {
-    Pokemon: {
-        pokemon: UpdatedPokemonResponse;
+    Poke: {
+        pokemon: PokemonResponse;
     };
 };
 
 function PokedexItem({ pokemon }: PokedexItemProps) {
     const navigation =
-        useNavigation<
-            NativeStackNavigationProp<RootStackParamList, "Pokemon">
-        >();
+        useNavigation<NativeStackNavigationProp<RootStackParamList, "Poke">>();
 
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate("Pokemon", { pokemon })}
+            onPress={() => navigation.navigate("Poke", { pokemon })}
         >
             <View style={styles.container}>
                 <View style={styles.circle}>

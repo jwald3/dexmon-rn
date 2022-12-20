@@ -298,7 +298,7 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#383838",
-        paddingBottom: 60,
+        paddingBottom: 180,
     },
     header: {
         alignItems: "center",
