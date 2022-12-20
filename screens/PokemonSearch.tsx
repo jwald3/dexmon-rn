@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import pokeData from "../data/PokemonData.json";
 import PokedexItem from "../components/PokedexItem";
-import { UpdatedPokemonResponse } from "./Home";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 
 interface BasicPokemonData {
@@ -17,8 +16,7 @@ type RenderPokemon = {
 };
 
 const PokemonSearch = () => {
-    const [allPokemon, setAllPokemon] =
-        useState<Array<BasicPokemonData>>(pokeData);
+    const [allPokemon] = useState<Array<BasicPokemonData>>(pokeData);
 
     const [filteredPokemon, setFilteredPokemon] = useState<
         Array<BasicPokemonData>

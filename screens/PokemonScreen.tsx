@@ -1,28 +1,54 @@
 import { View, Text, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { PokemonResponse } from "../components/EvolutionChainItem";
 import { useRoute, RouteProp } from "@react-navigation/native";
-import React, { useState, useEffect } from "react";
-import { UpdatedPokemonResponse } from "./Home";
-import { capitalize } from "../typescript/functions";
 import axios from "axios";
-import EStyleSheet from "react-native-extended-stylesheet";
-import GridRow from "../components/GridRow";
-import FlavorTextBox from "../components/FlavorTextBox";
-import BarChart from "../components/BarChartWrapper";
 import { ScrollView } from "react-native-gesture-handler";
+import { capitalize } from "../typescript/functions";
+import FlavorTextBox from "../components/FlavorTextBox";
 import EvolutionChain from "../components/EvolutionChain";
+import BarChart from "../components/BarChartWrapper";
+import GridRow from "../components/GridRow";
+import EStyleSheet from "react-native-extended-stylesheet";
 import Header from "../components/Header";
 
 export type RootStackParamList = {
     Pokemon: {
-        pokemon: UpdatedPokemonResponse;
+        pokemon: PokemonResponse;
     };
 };
 
-type UpdatedPoke = {
+interface InitialPokemonObject {
     name: string;
-    url: string;
+    id: number;
+    image_url: string;
+    types: [
+        {
+            type: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    stats: [
+        {
+            base_stat: number;
+            stat: {
+                name: string;
+                url: string;
+            };
+        }
+    ];
+    official_art: string;
+    height: number;
+    weight: number;
+}
+
+interface FinalPokemonObject {
+    name: string;
     image_url: string;
     id: number;
+    url: string;
     types: [
         {
             type: {
@@ -86,76 +112,103 @@ type UpdatedPoke = {
             }>;
         }>;
     };
-};
+}
 
-const PokemonScreen = () => {
+const JustNamePokemonScreen = () => {
     const {
         params: { pokemon },
     } = useRoute<RouteProp<RootStackParamList, "Pokemon">>();
 
-    const [updatedPokemon, setUpdatedPokemon] = useState<UpdatedPoke>();
+    const [updatedPokemon, setUpdatedPokemon] =
+        useState<InitialPokemonObject>();
+    const [fullPokemonObj, setFullPokemonObj] = useState<FinalPokemonObject>();
 
     useEffect(() => {
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`)
+            .get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
             .then((data) => {
-                const updatePoke = {
+                const updatedPoke = {
                     name: pokemon.name,
-                    url: pokemon.url,
-                    image_url: pokemon.image_url,
-                    id: pokemon.id,
-                    types: pokemon.types,
-                    stats: pokemon.stats,
-                    official_art: pokemon.official_art,
-                    classification: data.data.genera,
-                    flavor_text: data.data.flavor_text_entries,
-                    height: pokemon.height,
-                    weight: pokemon.weight,
-                    chain: data.data.evolution_chain,
+                    height: data.data.height,
+                    weight: data.data.weight,
+                    types: data.data.types,
+                    official_art:
+                        data.data.sprites["other"]["official-artwork"]
+                            .front_default,
+                    id: data.data.id,
+                    stats: data.data.stats,
+                    image_url: data.data.sprites.front_default,
                 };
 
-                const filteredClassification = updatePoke.classification.filter(
-                    (classification: {
-                        genus: string;
-                        language: { name: string };
-                    }) => classification.language.name === "en"
-                );
-
-                const filteredText = updatePoke.flavor_text.filter(
-                    (text: {
-                        flavor_text: string;
-                        language: { name: string };
-                    }) => text.language.name === "en"
-                );
-
-                // Handle the promise returned by the Axios call
-                axios.get(updatePoke.chain.url).then((data) => {
-                    // Update the evolution_chain property with the data returned by the Axios call
-                    updatePoke.chain = data.data.chain;
-
-                    // Create the newPoke object with the updated evolution_chain property
-                    const newPoke = {
-                        name: updatePoke.name,
-                        url: updatePoke.url,
-                        image_url: updatePoke.image_url,
-                        id: updatePoke.id,
-                        types: updatePoke.types,
-                        stats: updatePoke.stats,
-                        official_art: updatePoke.official_art,
-                        classification: filteredClassification,
-                        flavor_text: filteredText,
-                        height: updatePoke.height,
-                        weight: updatePoke.weight,
-                        chain: updatePoke.chain,
-                    };
-
-                    // Set the updatedPokemon state with the newPoke object
-                    setUpdatedPokemon(newPoke);
-                });
+                setUpdatedPokemon(updatedPoke);
             });
     }, []);
 
-    return updatedPokemon ? (
+    useEffect(() => {
+        updatedPokemon &&
+            axios
+                .get(
+                    `https://pokeapi.co/api/v2/pokemon-species/${updatedPokemon.id}`
+                )
+                .then((data) => {
+                    const updatePoke = {
+                        name: updatedPokemon.name,
+                        image_url: updatedPokemon.image_url,
+                        id: updatedPokemon.id,
+                        types: updatedPokemon.types,
+                        stats: updatedPokemon.stats,
+                        official_art: updatedPokemon.official_art,
+                        classification: data.data.genera,
+                        flavor_text: data.data.flavor_text_entries,
+                        height: updatedPokemon.height,
+                        weight: updatedPokemon.weight,
+                        chain: data.data.evolution_chain,
+                        url: "",
+                    };
+
+                    const filteredClassification =
+                        updatePoke.classification.filter(
+                            (classification: {
+                                genus: string;
+                                language: { name: string };
+                            }) => classification.language.name === "en"
+                        );
+
+                    const filteredText = updatePoke.flavor_text.filter(
+                        (text: {
+                            flavor_text: string;
+                            language: { name: string };
+                        }) => text.language.name === "en"
+                    );
+
+                    // Handle the promise returned by the Axios call
+                    axios.get(updatePoke.chain.url).then((data) => {
+                        // Update the evolution_chain property with the data returned by the Axios call
+                        updatePoke.chain = data.data.chain;
+
+                        // Create the newPoke object with the updated evolution_chain property
+                        const newPoke = {
+                            name: updatePoke.name,
+                            image_url: updatePoke.image_url,
+                            id: updatePoke.id,
+                            types: updatePoke.types,
+                            stats: updatePoke.stats,
+                            official_art: updatePoke.official_art,
+                            classification: filteredClassification,
+                            flavor_text: filteredText,
+                            height: updatePoke.height,
+                            weight: updatePoke.weight,
+                            chain: updatePoke.chain,
+                            url: updatePoke.url,
+                        };
+
+                        // Set the updatedPokemon state with the newPoke object
+                        setFullPokemonObj(newPoke);
+                    });
+                });
+    }, [updatedPokemon]);
+
+    return fullPokemonObj ? (
         <View>
             <Header
                 title="Pokemon"
@@ -168,7 +221,7 @@ const PokemonScreen = () => {
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Text style={styles.title}>
-                            {capitalize(updatedPokemon.name)}
+                            {capitalize(fullPokemonObj.name)}
                         </Text>
                         <View style={styles.imageContainer}>
                             <View style={styles.circle}>
@@ -176,7 +229,7 @@ const PokemonScreen = () => {
                                 <Image
                                     style={styles.image}
                                     source={{
-                                        uri: updatedPokemon.official_art,
+                                        uri: fullPokemonObj.official_art,
                                     }}
                                     resizeMode="contain"
                                 />
@@ -193,7 +246,7 @@ const PokemonScreen = () => {
                             height: 100,
                         }}
                     >
-                        <GridRow pokemon={updatedPokemon} />
+                        <GridRow pokemon={fullPokemonObj} />
                     </View>
                     <View
                         style={{
@@ -206,7 +259,7 @@ const PokemonScreen = () => {
                         }}
                     >
                         <FlavorTextBox
-                            text={updatedPokemon.flavor_text[0].flavor_text}
+                            text={fullPokemonObj.flavor_text[0].flavor_text}
                         />
                     </View>
                     <View
@@ -218,7 +271,7 @@ const PokemonScreen = () => {
                             height: 215,
                         }}
                     >
-                        <EvolutionChain chain={updatedPokemon.chain} />
+                        <EvolutionChain chain={fullPokemonObj.chain} />
                     </View>
                     <View
                         style={{
@@ -230,7 +283,7 @@ const PokemonScreen = () => {
                         }}
                     >
                         <BarChart
-                            stats={pokemon.stats.map((stat) => ({
+                            stats={fullPokemonObj.stats.map((stat) => ({
                                 name: stat.stat.name,
                                 value: stat.base_stat,
                             }))}
@@ -249,7 +302,7 @@ const styles = EStyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#383838",
-        paddingBottom: 60,
+        paddingBottom: 180,
     },
     header: {
         alignItems: "center",
@@ -329,4 +382,4 @@ const styles = EStyleSheet.create({
     },
 });
 
-export default PokemonScreen;
+export default JustNamePokemonScreen;
