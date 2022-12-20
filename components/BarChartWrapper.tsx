@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 interface Stats {
     name: string;
@@ -33,55 +33,15 @@ const BarChart = (props: Props) => {
     };
 
     return (
-        <View
-            style={{
-                backgroundColor: "rgba(255,255,255,0.10)",
-                width: "100%",
-                marginLeft: "auto",
-                marginRight: "auto",
-                borderWidth: 1,
-                borderColor: "rgba(255,255,255,0.50)",
-                borderRadius: 3,
-
-                flex: 1,
-                justifyContent: "center",
-            }}
-        >
-            <View
-                style={{
-                    backgroundColor: "#42AD4A",
-                    paddingVertical: 3,
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <Text
-                    style={{
-                        fontWeight: "bold",
-                        color: "#F8F8FF",
-                    }}
-                >
-                    Stats
-                </Text>
+        <View style={styles.chartContainer}>
+            <View style={styles.chartTitleContainer}>
+                <Text style={styles.chartTitleText}>Stats</Text>
             </View>
-            <View style={{ flex: 1, paddingVertical: "auto" }}>
+            <View style={styles.chartBody}>
                 {stats.map((stat, index) => (
-                    <View
-                        key={stat.name}
-                        style={{
-                            flexDirection: "row",
-                            paddingTop: 5,
-                            paddingBottom: 5,
-                            alignItems: "center",
-                            borderTopColor: "#f8f8ff",
-                            borderTopWidth: 1,
-                            paddingLeft: 5,
-                            paddingRight: 5,
-                        }}
-                    >
-                        <View style={{ width: 50 }}>
-                            <Text style={{ color: "#f8f8ff", marginRight: 10 }}>
+                    <View key={stat.name} style={styles.chartRowContainer}>
+                        <View style={styles.chartStatLabelContainer}>
+                            <Text style={styles.chartStatLabelText}>
                                 {stat.name.replace(
                                     stat.name,
                                     (m) =>
@@ -93,7 +53,7 @@ const BarChart = (props: Props) => {
                             </Text>
                         </View>
 
-                        <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={styles.chartRowBody}>
                             <View
                                 style={{
                                     width:
@@ -112,29 +72,13 @@ const BarChart = (props: Props) => {
                                 }}
                             >
                                 {stat.value >= 20 && (
-                                    <Text
-                                        style={{
-                                            position: "absolute",
-                                            right: 10,
-                                            top: 0,
-                                            bottom: 0,
-                                            justifyContent: "center",
-                                            color: "#16161d",
-                                            fontWeight: "bold",
-                                        }}
-                                    >
+                                    <Text style={styles.textOnBar}>
                                         {stat.value}
                                     </Text>
                                 )}
                             </View>
                             {stat.value < 20 && (
-                                <Text
-                                    style={{
-                                        marginLeft: 10,
-                                        color: "#f8f8ff",
-                                        fontWeight: "bold",
-                                    }}
-                                >
+                                <Text style={styles.textBesideBar}>
                                     {stat.value}
                                 </Text>
                             )}
@@ -147,3 +91,67 @@ const BarChart = (props: Props) => {
 };
 
 export default BarChart;
+
+const styles = StyleSheet.create({
+    chartContainer: {
+        backgroundColor: "rgba(255,255,255,0.10)",
+        width: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderWidth: 1,
+        borderColor: "rgba(255,255,255,0.50)",
+        borderRadius: 3,
+        flex: 1,
+        justifyContent: "center",
+    },
+    chartTitleContainer: {
+        backgroundColor: "#42AD4A",
+        paddingVertical: 3,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    chartTitleText: {
+        fontWeight: "bold",
+        color: "#F8F8FF",
+    },
+    chartBody: {
+        flex: 1,
+        paddingVertical: "auto",
+    },
+    chartRowContainer: {
+        flexDirection: "row",
+        paddingTop: 5,
+        paddingBottom: 5,
+        alignItems: "center",
+        borderTopColor: "#f8f8ff",
+        borderTopWidth: 1,
+        paddingLeft: 5,
+        paddingRight: 5,
+    },
+    chartStatLabelContainer: {
+        width: 50,
+    },
+    chartStatLabelText: {
+        color: "#f8f8ff",
+        marginRight: 10,
+    },
+    chartRowBody: {
+        flex: 1,
+        flexDirection: "row",
+    },
+    textOnBar: {
+        position: "absolute",
+        right: 10,
+        top: 0,
+        bottom: 0,
+        justifyContent: "center",
+        color: "#16161d",
+        fontWeight: "bold",
+    },
+    textBesideBar: {
+        marginLeft: 10,
+        color: "#f8f8ff",
+        fontWeight: "bold",
+    },
+});
