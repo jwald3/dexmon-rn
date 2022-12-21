@@ -126,17 +126,15 @@ const PokemonSearch = () => {
                 </View>
 
                 {messageText === "" ? (
-                    <ScrollView>
-                        <FlatList
-                            data={filteredPokemon}
-                            initialNumToRender={20}
-                            renderItem={renderItem}
-                            keyExtractor={(item) => String(item.name)}
-                            removeClippedSubviews={true}
-                            maxToRenderPerBatch={20}
-                            contentContainerStyle={{ paddingBottom: 200 }}
-                        />
-                    </ScrollView>
+                    <FlatList
+                        data={filteredPokemon}
+                        initialNumToRender={20}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => String(item.name)}
+                        removeClippedSubviews={true}
+                        maxToRenderPerBatch={20}
+                        contentContainerStyle={{ paddingBottom: 200 }}
+                    />
                 ) : (
                     <View style={styles.messageTextContainer}>
                         <Text style={styles.messageText}>{messageText}</Text>
