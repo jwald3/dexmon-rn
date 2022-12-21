@@ -12,6 +12,7 @@ import pokeData from "../data/PokemonData.json";
 import PokedexItem from "../components/PokedexItem";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { ScrollView } from "react-native-gesture-handler";
 
 interface BasicPokemonData {
     name: string;
@@ -96,7 +97,7 @@ const PokemonSearch = () => {
                     showBackButton={true}
                     showSearchButton={false}
                 />
-                <View>
+                <ScrollView>
                     <View style={styles.headerContainer}>
                         <View style={styles.subHeaderContainer}>
                             <MagnifyingGlassIcon color="#fff" size={20} />
@@ -127,7 +128,7 @@ const PokemonSearch = () => {
                             </Text>
                         </View>
                     )}
-                </View>
+                </ScrollView>
             </View>
         </TouchableWithoutFeedback>
     );
