@@ -1,14 +1,5 @@
-import axios from "axios";
 import React, { useMemo } from "react";
-import {
-    View,
-    Text,
-    Dimensions,
-    FlatList,
-    Image,
-    Platform,
-    ScrollView,
-} from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import { capitalize } from "../typescript/functions";
 import EvolutionChainItem from "./EvolutionChainItem";
 
@@ -68,86 +59,23 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
     }, [chain.evolves_to]);
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                marginHorizontal: 5,
-                borderWidth: 1,
-                borderColor: "rgba(255,255,255,0.50)",
-                borderRadius: 3,
-                width: "100%",
-            }}
-        >
-            <View
-                style={{
-                    backgroundColor: "#42AD4A",
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    paddingVertical: 3,
-                }}
-            >
-                <Text
-                    style={{
-                        fontWeight: "bold",
-                        color: "#F8F8FF",
-                    }}
-                >
-                    Evolution Chain
-                </Text>
+        <View style={styles.mainContainer}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.headerText}>Evolution Chain</Text>
             </View>
-            <View
-                style={{
-                    flex: 1,
-                    width: "100%",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "rgba(255,255,255,0.10)",
-                    overflow: "hidden",
-                }}
-            >
+            <View style={styles.containerBody}>
                 <FlatList
                     data={data}
                     renderItem={({ item, index }) => {
                         const nextItem = data[index + 1];
                         return (
-                            <View
-                                style={{
-                                    flex: 1,
-                                    height: "100%",
-                                    alignItems: "center",
-                                    justifyContent: "space-around",
-                                    display: "flex",
-                                    flexDirection: "row",
-                                }}
-                            >
+                            <View style={styles.chainItemWrapper}>
                                 <EvolutionChainItem item={item.species} />
                                 {nextItem && nextItem.level === item.level && (
-                                    <Text
-                                        style={{
-                                            color: "#F8F8FF",
-                                            fontSize: 20,
-                                        }}
-                                    >
-                                        OR
-                                    </Text>
+                                    <Text style={styles.orText}>OR</Text>
                                 )}
                                 {nextItem && nextItem.level > item.level && (
-                                    <View
-                                        style={{
-                                            width: 15,
-                                            height: 15,
-                                            borderTopWidth: 2,
-                                            borderRightWidth: 2,
-                                            borderColor: "#F8F8FF",
-                                            transform: [
-                                                {
-                                                    rotate: "45deg",
-                                                },
-                                            ],
-                                        }}
-                                    />
+                                    <View style={styles.arrow} />
                                 )}
                             </View>
                         );
@@ -162,3 +90,58 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
 };
 
 export default EvolutionChain;
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        alignItems: "center",
+        marginHorizontal: 5,
+        borderWidth: 1,
+        borderColor: "rgba(255,255,255,0.50)",
+        borderRadius: 3,
+        width: "100%",
+    },
+    headerContainer: {
+        backgroundColor: "#42AD4A",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical: 3,
+    },
+    headerText: {
+        fontWeight: "bold",
+        color: "#F8F8FF",
+    },
+    containerBody: {
+        flex: 1,
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(255,255,255,0.10)",
+        overflow: "hidden",
+    },
+    chainItemWrapper: {
+        flex: 1,
+        height: "100%",
+        alignItems: "center",
+        justifyContent: "space-around",
+        display: "flex",
+        flexDirection: "row",
+    },
+    orText: {
+        color: "#F8F8FF",
+        fontSize: 20,
+    },
+    arrow: {
+        width: 15,
+        height: 15,
+        borderTopWidth: 2,
+        borderRightWidth: 2,
+        borderColor: "#F8F8FF",
+        transform: [
+            {
+                rotate: "45deg",
+            },
+        ],
+    },
+});
