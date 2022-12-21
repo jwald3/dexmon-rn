@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface Stats {
     name: string;
@@ -92,7 +93,7 @@ const BarChart = (props: Props) => {
 
 export default BarChart;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     chartContainer: {
         backgroundColor: "rgba(255,255,255,0.10)",
         width: "100%",
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     chartTitleContainer: {
-        backgroundColor: "#42AD4A",
+        backgroundColor: "$mainAccent",
         paddingVertical: 3,
         width: "100%",
         justifyContent: "center",
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     },
     chartTitleText: {
         fontWeight: "bold",
-        color: "#F8F8FF",
+        color: "$mainText",
     },
     chartBody: {
         flex: 1,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 5,
         alignItems: "center",
-        borderTopColor: "#f8f8ff",
+        borderTopColor: "$mainText",
         borderTopWidth: 1,
         paddingLeft: 5,
         paddingRight: 5,
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         width: 50,
     },
     chartStatLabelText: {
-        color: "#f8f8ff",
+        color: "$mainText",
         marginRight: 10,
     },
     chartRowBody: {
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     },
     textBesideBar: {
         marginLeft: 10,
-        color: "#f8f8ff",
+        color: "$mainText",
         fontWeight: "bold",
     },
 });

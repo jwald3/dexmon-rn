@@ -5,13 +5,13 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     Keyboard,
-    StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import pokeData from "../data/PokemonData.json";
 import PokedexItem from "../components/PokedexItem";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface BasicPokemonData {
     name: string;
@@ -135,13 +135,13 @@ const PokemonSearch = () => {
 
 export default PokemonSearch;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
-        backgroundColor: "#383838",
+        backgroundColor: "$mainDark",
         flex: 1,
     },
     headerContainer: {
-        backgroundColor: "#42AD4A",
+        backgroundColor: "$mainAccent",
     },
     subHeaderContainer: {
         display: "flex",
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         height: 50,
     },
     searchTextInput: {
-        color: "#383838",
+        color: "$mainDark",
         flex: 1,
         marginLeft: 8,
         backgroundColor: "rgba(255, 255, 255, 0.5)",

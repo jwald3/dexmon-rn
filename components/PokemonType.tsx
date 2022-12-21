@@ -1,5 +1,6 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 type Props = {
     type: string;
@@ -13,7 +14,7 @@ const PokemonType: React.FC<Props> = ({ type }) => {
     );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         padding: 8,
         borderRadius: 8,
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 14,
         textAlign: "center",
-        color: "#fff",
+        color: "$mainText",
     },
 });
 

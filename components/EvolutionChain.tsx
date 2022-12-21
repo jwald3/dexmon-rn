@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
-import { capitalize } from "../typescript/functions";
+import { View, Text, FlatList } from "react-native";
 import EvolutionChainItem from "./EvolutionChainItem";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface Props {
     chain: {
@@ -91,7 +91,7 @@ const EvolutionChain: React.FC<Props> = ({ chain }) => {
 
 export default EvolutionChain;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     headerContainer: {
-        backgroundColor: "#42AD4A",
+        backgroundColor: "$mainAccent",
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontWeight: "bold",
-        color: "#F8F8FF",
+        color: "$mainText",
     },
     containerBody: {
         flex: 1,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     orText: {
-        color: "#F8F8FF",
+        color: "$mainText",
         fontSize: 20,
     },
     arrow: {
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         height: 15,
         borderTopWidth: 2,
         borderRightWidth: 2,
-        borderColor: "#F8F8FF",
+        borderColor: "$mainText",
         transform: [
             {
                 rotate: "45deg",

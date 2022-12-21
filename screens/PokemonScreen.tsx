@@ -215,9 +215,7 @@ const JustNamePokemonScreen = () => {
                 showBackButton={true}
                 showSearchButton={true}
             />
-            <ScrollView
-                style={{ backgroundColor: "#383838", paddingVertical: 30 }}
-            >
+            <ScrollView style={styles.mainContainer}>
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <Text style={styles.title}>
@@ -282,25 +280,29 @@ const JustNamePokemonScreen = () => {
 };
 
 const styles = EStyleSheet.create({
+    mainContainer: {
+        backgroundColor: "#383838",
+        paddingVertical: 30,
+    },
     container: {
         flex: 1,
-        backgroundColor: "#383838",
+        backgroundColor: "$mainDark",
         paddingBottom: 180,
     },
     header: {
         alignItems: "center",
         paddingTop: 20,
         paddingBottom: 20,
-        color: "#fff",
+        color: "$mainText",
     },
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#fff",
+        color: "$mainText",
     },
     subtitleText: {
         fontSize: 16,
-        color: "#fff",
+        color: "$mainText",
     },
     imageContainer: {
         position: "relative",

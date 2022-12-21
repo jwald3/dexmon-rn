@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
+import { View, Image, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { UpdatedPokemonResponse } from "../screens/Home";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { capitalize } from "../typescript/functions";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface PokedexItemProps {
     pokemon: UpdatedPokemonResponse;
@@ -47,7 +48,7 @@ function PokedexItem({ pokemon }: PokedexItemProps) {
     );
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         flexDirection: "row",
         alignItems: "center",
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderBottomColor: "#42AD4A",
+        borderBottomColor: "$mainAccent",
         borderBottomStyle: "solid",
         marginHorizontal: 10,
     },
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 50,
         borderWidth: 2,
-        borderColor: "#fff",
+        borderColor: "$mainText",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "rgba(255, 255, 255, 0.8)", // add this line
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     pokemonName: {
         fontSize: 20,
         fontWeight: "bold",
-        color: "#fff",
+        color: "$mainText",
         marginLeft: 20,
     },
     arrow: {

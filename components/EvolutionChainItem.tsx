@@ -1,16 +1,10 @@
-import {
-    View,
-    Text,
-    Image,
-    TouchableOpacity,
-    Dimensions,
-    StyleSheet,
-} from "react-native";
+import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface EvoItems {
     item: {
@@ -63,7 +57,7 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
 
 export default EvolutionChainItem;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         alignItems: "center",
         marginHorizontal: 5,
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
         height: 75,
     },
     imageCaption: {
-        color: "#F8F8FF",
+        color: "$mainText",
         fontSize: 12,
     },
 });

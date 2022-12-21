@@ -1,18 +1,12 @@
 import React from "react";
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StatusBar,
-    StyleSheet,
-    Keyboard,
-} from "react-native";
+import { View, Text, TouchableOpacity, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import {
     ChevronLeftIcon,
     MagnifyingGlassIcon,
 } from "react-native-heroicons/outline";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface HeaderProps {
     title: string;
@@ -74,12 +68,12 @@ const Header: React.FC<HeaderProps> = (props) => {
     );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         backgroundColor: "#42AD4A",
         height: 100,
         paddingTop: 40,
-        color: "#fff",
+        color: "$mainText",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -97,14 +91,14 @@ const styles = StyleSheet.create({
         flex: 3,
     },
     backText: {
-        color: "#fff",
+        color: "$mainText",
         fontSize: 16,
     },
     title: {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "#fff",
+        color: "$mainText",
         fontSize: 20,
     },
     searchButtonContainer: {

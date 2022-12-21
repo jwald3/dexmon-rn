@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface FlavorTextProps {
     text: string;
@@ -22,7 +23,7 @@ const FlavorTextBox = ({ text }: FlavorTextProps) => {
 
 export default FlavorTextBox;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     headerContainer: {
-        backgroundColor: "#42AD4A",
+        backgroundColor: "$mainAccent",
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontWeight: "bold",
-        color: "#F8F8FF",
+        color: "$mainText",
     },
     containerBody: {
         flex: 1,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(255,255,255,0.10)",
     },
     containerText: {
-        color: "#fff",
+        color: "$mainText",
         textAlign: "center",
     },
 });

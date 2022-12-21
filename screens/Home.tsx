@@ -1,9 +1,9 @@
-import { View, FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import { View, FlatList, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PokedexItem from "../components/PokedexItem";
-import { StatusBar } from "expo-status-bar";
 import Header from "../components/Header";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 type BasePokemonResponse = {
     name: string;
@@ -128,9 +128,9 @@ const Home = () => {
 
 export default Home;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
-        backgroundColor: "#383838", // pink
+        backgroundColor: "$mainDark",
         flex: 1,
     },
     loader: {

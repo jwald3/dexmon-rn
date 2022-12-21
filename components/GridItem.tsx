@@ -1,12 +1,6 @@
-import {
-    View,
-    Text,
-    Image,
-    Dimensions,
-    Platform,
-    StyleSheet,
-} from "react-native";
+import { View, Text, Image, Dimensions, Platform } from "react-native";
 import React from "react";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 interface GridItemProps {
     category: string;
@@ -53,7 +47,7 @@ const GridItem = ({ category, value, image }: GridItemProps) => {
 
 export default GridItem;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flex: 1,
         alignItems: "center",
@@ -62,7 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 3,
     },
     headerContainer: {
-        backgroundColor: "#42AD4A",
+        backgroundColor: "$mainAccent",
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -70,7 +64,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontWeight: "bold",
-        color: "#F8F8FF",
+        color: "$mainText",
     },
     containerBody: {
         flex: 1,
@@ -85,7 +79,7 @@ const styles = StyleSheet.create({
         height: 48,
     },
     bodyText: {
-        color: "#fff",
+        color: "$mainText",
         paddingHorizontal: 5,
     },
 });

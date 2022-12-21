@@ -2,13 +2,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./screens/Home";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { Button, StatusBar, Text } from "react-native";
 import JustNamePokemonScreen from "./screens/PokemonScreen";
 import PokemonSearch from "./screens/PokemonSearch";
 
 const Stack = createNativeStackNavigator();
 
-EStyleSheet.build();
+EStyleSheet.build({
+    $mainAccent: "#42AD4A",
+    $mainDark: "#383838",
+    $mainText: "#F8F8FF",
+});
 
 export default function App() {
     return (

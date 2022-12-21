@@ -1,15 +1,9 @@
 import React from "react";
-import {
-    View,
-    Text,
-    Image,
-    Dimensions,
-    Platform,
-    StyleSheet,
-} from "react-native";
+import { View, Dimensions, Platform } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { capitalize } from "../typescript/functions";
 import GridItem from "./GridItem";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 type UpdatedPoke = {
     name: string;
@@ -141,7 +135,7 @@ const GridRow = ({ pokemon }: RowProps) => {
 
 export default GridRow;
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         width: "100%",
         marginLeft: "auto",
