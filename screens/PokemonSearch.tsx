@@ -97,21 +97,22 @@ const PokemonSearch = () => {
                     showBackButton={true}
                     showSearchButton={false}
                 />
-                <ScrollView>
-                    <View style={styles.headerContainer}>
-                        <View style={styles.subHeaderContainer}>
-                            <MagnifyingGlassIcon color="#fff" size={20} />
-                            <TextInput
-                                placeholder="Search Pokemon by name"
-                                keyboardType="default"
-                                value={searchQuery}
-                                onChangeText={(val) => setSearchQuery(val)}
-                                style={styles.searchTextInput}
-                            />
-                        </View>
-                    </View>
 
-                    {messageText === "" ? (
+                <View style={styles.headerContainer}>
+                    <View style={styles.subHeaderContainer}>
+                        <MagnifyingGlassIcon color="#fff" size={20} />
+                        <TextInput
+                            placeholder="Search Pokemon by name"
+                            keyboardType="default"
+                            value={searchQuery}
+                            onChangeText={(val) => setSearchQuery(val)}
+                            style={styles.searchTextInput}
+                        />
+                    </View>
+                </View>
+
+                {messageText === "" ? (
+                    <ScrollView>
                         <FlatList
                             data={filteredPokemon}
                             initialNumToRender={20}
@@ -121,14 +122,12 @@ const PokemonSearch = () => {
                             maxToRenderPerBatch={20}
                             contentContainerStyle={{ paddingBottom: 200 }}
                         />
-                    ) : (
-                        <View style={styles.messageTextContainer}>
-                            <Text style={styles.messageText}>
-                                {messageText}
-                            </Text>
-                        </View>
-                    )}
-                </ScrollView>
+                    </ScrollView>
+                ) : (
+                    <View style={styles.messageTextContainer}>
+                        <Text style={styles.messageText}>{messageText}</Text>
+                    </View>
+                )}
             </View>
         </TouchableWithoutFeedback>
     );
