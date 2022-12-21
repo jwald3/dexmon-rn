@@ -5,6 +5,7 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     Keyboard,
+    StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
@@ -89,42 +90,22 @@ const PokemonSearch = () => {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={{ backgroundColor: "#383838", flex: 1 }}>
+            <View style={styles.mainContainer}>
                 <Header
                     title="Search Pokemon"
                     showBackButton={true}
                     showSearchButton={false}
                 />
                 <View>
-                    <View style={{ backgroundColor: "#42AD4A" }}>
-                        <View
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                padding: 3,
-                                alignItems: "center",
-                                justifyContent: "space-around",
-                                width: "80%",
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                height: 50,
-                            }}
-                        >
+                    <View style={styles.headerContainer}>
+                        <View style={styles.subHeaderContainer}>
                             <MagnifyingGlassIcon color="#fff" size={20} />
                             <TextInput
                                 placeholder="Search Pokemon by name"
                                 keyboardType="default"
                                 value={searchQuery}
                                 onChangeText={(val) => setSearchQuery(val)}
-                                style={{
-                                    color: "#383838",
-                                    flex: 1,
-                                    marginLeft: 8,
-                                    backgroundColor: "rgba(255, 255, 255, 0.5)",
-                                    padding: 8,
-                                    borderRadius: 3,
-                                    paddingLeft: 8,
-                                }}
+                                style={styles.searchTextInput}
                             />
                         </View>
                     </View>
@@ -140,16 +121,8 @@ const PokemonSearch = () => {
                             contentContainerStyle={{ paddingBottom: 200 }}
                         />
                     ) : (
-                        <View
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginTop: "auto",
-                                height: "50%",
-                            }}
-                        >
-                            <Text style={{ color: "rgba(255, 255, 255, 0.7)" }}>
+                        <View style={styles.messageTextContainer}>
+                            <Text style={styles.messageText}>
                                 {messageText}
                             </Text>
                         </View>
@@ -161,3 +134,43 @@ const PokemonSearch = () => {
 };
 
 export default PokemonSearch;
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        backgroundColor: "#383838",
+        flex: 1,
+    },
+    headerContainer: {
+        backgroundColor: "#42AD4A",
+    },
+    subHeaderContainer: {
+        display: "flex",
+        flexDirection: "row",
+        padding: 3,
+        alignItems: "center",
+        justifyContent: "space-around",
+        width: "80%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        height: 50,
+    },
+    searchTextInput: {
+        color: "#383838",
+        flex: 1,
+        marginLeft: 8,
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
+        padding: 8,
+        borderRadius: 3,
+        paddingLeft: 8,
+    },
+    messageTextContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "auto",
+        height: "50%",
+    },
+    messageText: {
+        color: "rgba(255, 255, 255, 0.7)",
+    },
+});
