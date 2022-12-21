@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, Dimensions, Platform } from "react-native";
+import {
+    View,
+    Text,
+    Image,
+    Dimensions,
+    Platform,
+    StyleSheet,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { capitalize } from "../typescript/functions";
 import GridItem from "./GridItem";
@@ -54,30 +61,14 @@ const GridRow = ({ pokemon }: RowProps) => {
     const gridRowMaxWidth = screenWidth * 0.9;
 
     return (
-        // <View
-        //     style={{
-        //         width: gridRowMaxWidth,
-        //         height: 80,
-        //         flexDirection: "row",
-        //         justifyContent: "space-around",
-        //         marginLeft: "auto",
-        //         marginRight: "auto",
-        //     }}
-        // >
-        <View
-            style={{
-                width: "100%",
-                marginLeft: "auto",
-                marginRight: "auto",
-            }}
-        >
+        <View style={styles.mainContainer}>
             {Platform.OS !== "web" ? (
                 <ScrollView
                     horizontal={true}
-                    contentContainerStyle={{
-                        height: 100,
-                        minWidth: gridRowMaxWidth,
-                    }}
+                    contentContainerStyle={[
+                        styles.scrollView,
+                        { minWidth: gridRowMaxWidth },
+                    ]}
                 >
                     <GridItem
                         category={"Classification"}
@@ -109,40 +100,31 @@ const GridRow = ({ pokemon }: RowProps) => {
                     />
                 </ScrollView>
             ) : (
-                <View
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        width: "100%",
-                        height: 100,
-                        justifyContent: "space-between",
-                        minWidth: 600,
-                    }}
-                >
+                <View style={styles.webViewContainer}>
                     <GridItem
                         category={"Classification"}
                         value={pokemon.classification[0].genus}
                         image={false}
                     />
-                    <View style={{ marginHorizontal: 5 }} />
+                    <View style={styles.webGaps} />
                     <GridItem
                         category={"Sprite"}
                         value={pokemon.image_url}
                         image={true}
                     />
-                    <View style={{ marginHorizontal: 5 }} />
+                    <View style={styles.webGaps} />
                     <GridItem
                         category={"Height"}
                         value={`${pokemon.height / 10} m`}
                         image={false}
                     />
-                    <View style={{ marginHorizontal: 5 }} />
+                    <View style={styles.webGaps} />
                     <GridItem
                         category={"Weight"}
                         value={`${pokemon.weight / 10} kg`}
                         image={false}
                     />
-                    <View style={{ marginHorizontal: 5 }} />
+                    <View style={styles.webGaps} />
                     <GridItem
                         category={"Type"}
                         value={pokemon.types
@@ -158,3 +140,25 @@ const GridRow = ({ pokemon }: RowProps) => {
 };
 
 export default GridRow;
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        width: "100%",
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
+    scrollView: {
+        height: 100,
+    },
+    webViewContainer: {
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        height: 100,
+        justifyContent: "space-between",
+        minWidth: 600,
+    },
+    webGaps: {
+        marginHorizontal: 5,
+    },
+});
