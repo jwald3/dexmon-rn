@@ -5,8 +5,9 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     Keyboard,
+    Platform,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import pokeData from "../data/PokemonData.json";
 import PokedexItem from "../components/PokedexItem";
@@ -34,6 +35,18 @@ const PokemonSearch = () => {
     const [messageText, setMessageText] = useState(
         "Begin searching Pokemon by typing a name"
     );
+
+    const textInputRef = useRef<TextInput>(null);
+
+    const handlePress = () => {
+        if (Platform.OS !== "web") {
+            if (textInputRef.current && textInputRef.current.isFocused()) {
+                Keyboard.dismiss();
+            }
+        }
+    };
+
+    const [inputIsFocused, setInputIsFocused] = useState(false);
 
     useEffect(() => {
         if (searchQuery.length >= 2) {
@@ -90,7 +103,7 @@ const PokemonSearch = () => {
     };
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={handlePress}>
             <View style={styles.mainContainer}>
                 <Header
                     title="Search Pokemon"
@@ -102,6 +115,7 @@ const PokemonSearch = () => {
                     <View style={styles.subHeaderContainer}>
                         <MagnifyingGlassIcon color="#fff" size={20} />
                         <TextInput
+                            ref={textInputRef}
                             placeholder="Search Pokemon by name"
                             keyboardType="default"
                             value={searchQuery}
@@ -168,7 +182,8 @@ const styles = EStyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: "auto",
-        height: "50%",
+        marginBottom: "auto",
+        height: "auto",
     },
     messageText: {
         color: "rgba(255, 255, 255, 0.7)",
