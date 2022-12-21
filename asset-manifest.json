@@ -1,0 +1,22 @@
+{
+  "files": {
+    "app.js": "/dexmon-rn/static/js/app.231f8a75.chunk.js",
+    "app.js.map": "/dexmon-rn/static/js/app.231f8a75.chunk.js.map",
+    "runtime~app.js": "/dexmon-rn/static/js/runtime~app.addfab66.js",
+    "runtime~app.js.map": "/dexmon-rn/static/js/runtime~app.addfab66.js.map",
+    "static/js/2.6ddca018.chunk.js": "/dexmon-rn/static/js/2.6ddca018.chunk.js",
+    "static/js/2.6ddca018.chunk.js.map": "/dexmon-rn/static/js/2.6ddca018.chunk.js.map",
+    "favicon-16.png": "/dexmon-rn/favicon-16.png",
+    "favicon-32.png": "/dexmon-rn/favicon-32.png",
+    "favicon.ico": "/dexmon-rn/favicon.ico",
+    "index.html": "/dexmon-rn/index.html",
+    "manifest.json": "/dexmon-rn/manifest.json",
+    "serve.json": "/dexmon-rn/serve.json",
+    "static/js/2.6ddca018.chunk.js.LICENSE.txt": "/dexmon-rn/static/js/2.6ddca018.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.addfab66.js",
+    "static/js/2.6ddca018.chunk.js",
+    "static/js/app.231f8a75.chunk.js"
+  ]
+}
