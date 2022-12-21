@@ -1,8 +1,14 @@
-import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import {
+    View,
+    Text,
+    Image,
+    TouchableOpacity,
+    Dimensions,
+    StyleSheet,
+} from "react-native";
+import React, { useLayoutEffect, useState } from "react";
 import { capitalize } from "../typescript/functions";
 import axios from "axios";
-import { UpdatedPokemonResponse } from "../screens/Home";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -39,32 +45,16 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
 
     return imageUrl !== "" ? (
         <TouchableOpacity
-            style={{
-                alignItems: "center",
-                marginHorizontal: 5,
-                flex: 1,
-                minWidth: Math.min(screenWidth / 10, 85),
-                padding: 10,
-            }}
+            style={[
+                styles.mainContainer,
+                { minWidth: Math.min(screenWidth / 10, 85) },
+            ]}
             onPress={() =>
                 navigation.push("Poke", { pokemon: { name: item.name } })
             }
         >
-            <Image
-                style={{
-                    width: 75,
-                    height: 75,
-                }}
-                source={{ uri: imageUrl }}
-            />
-            <Text
-                style={{
-                    color: "#F8F8FF",
-                    fontSize: 12,
-                }}
-            >
-                {capitalize(item.name)}
-            </Text>
+            <Image style={styles.image} source={{ uri: imageUrl }} />
+            <Text style={styles.imageCaption}>{capitalize(item.name)}</Text>
         </TouchableOpacity>
     ) : (
         <View></View>
@@ -72,3 +62,20 @@ const EvolutionChainItem = ({ item }: EvoItems) => {
 };
 
 export default EvolutionChainItem;
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        alignItems: "center",
+        marginHorizontal: 5,
+        flex: 1,
+        padding: 10,
+    },
+    image: {
+        width: 75,
+        height: 75,
+    },
+    imageCaption: {
+        color: "#F8F8FF",
+        fontSize: 12,
+    },
+});
