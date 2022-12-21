@@ -39,50 +39,23 @@ const Header: React.FC<HeaderProps> = (props) => {
             <View style={styles.container}>
                 {props.showBackButton ? (
                     <TouchableOpacity
-                        style={{ width: 50, marginLeft: 20 }}
+                        style={styles.backButtonContainer}
                         onPress={() =>
                             navigation.navigate("Home", { Home: "" })
                         }
                     >
-                        <View
-                            style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "flex-start",
-                                flex: 3,
-                            }}
-                        >
+                        <View style={styles.backButtonText}>
                             <ChevronLeftIcon size={28} color="#fff" />
-                            <Text style={{ color: "#fff", fontSize: 16 }}>
-                                Back
-                            </Text>
+                            <Text style={styles.backText}>Back</Text>
                         </View>
                     </TouchableOpacity>
                 ) : (
-                    <View style={{ width: 50 }}></View>
+                    <View style={styles.backButtonContainer}></View>
                 )}
-                <Text
-                    style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        color: "#fff",
-                        fontSize: 20,
-                    }}
-                >
-                    {props.title}
-                </Text>
+                <Text style={styles.title}>{props.title}</Text>
                 {props.showSearchButton ? (
                     <TouchableOpacity
-                        style={{
-                            width: 50,
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "flex-end",
-                            marginRight: 20,
-                        }}
+                        style={styles.searchButtonContainer}
                         onPress={() =>
                             navigation.navigate("Search", { Search: "" })
                         }
@@ -90,11 +63,11 @@ const Header: React.FC<HeaderProps> = (props) => {
                         <MagnifyingGlassIcon
                             size={24}
                             color="#fff"
-                            style={{ paddingLeft: "auto" }}
+                            style={styles.searchIcon}
                         />
                     </TouchableOpacity>
                 ) : (
-                    <View style={{ width: 50 }}></View>
+                    <View style={styles.searchButtonContainer}></View>
                 )}
             </View>
         </View>
@@ -112,22 +85,38 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
     },
-    backButton: {
-        position: "absolute",
-        left: 20,
-        top: 30,
+    backButtonContainer: {
+        width: 50,
+        marginLeft: 20,
     },
     backButtonText: {
-        color: "white",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        flex: 3,
+    },
+    backText: {
+        color: "#fff",
         fontSize: 16,
     },
     title: {
-        color: "white",
-        fontSize: 22,
-        flex: 1,
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
+        color: "#fff",
+        fontSize: 20,
+    },
+    searchButtonContainer: {
+        width: 50,
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        marginRight: 20,
+    },
+    searchIcon: {
+        paddingLeft: "auto",
     },
 });
 
