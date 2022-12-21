@@ -237,51 +237,34 @@ const JustNamePokemonScreen = () => {
                         </View>
                     </View>
                     <View
-                        style={{
-                            width: "90%",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            marginTop: 0,
-                            minHeight: 75,
-                            height: 100,
-                        }}
+                        style={[
+                            styles.componentWrapper,
+                            {
+                                marginTop: 0,
+                                minHeight: 75,
+                                height: 100,
+                            },
+                        ]}
                     >
                         <GridRow pokemon={fullPokemonObj} />
                     </View>
                     <View
-                        style={{
-                            width: "90%",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            marginTop: 50,
-                            minHeight: 75,
-                            height: 100,
-                        }}
+                        style={[
+                            styles.componentWrapper,
+                            {
+                                minHeight: 75,
+                                height: 100,
+                            },
+                        ]}
                     >
                         <FlavorTextBox
                             text={fullPokemonObj.flavor_text[0].flavor_text}
                         />
                     </View>
-                    <View
-                        style={{
-                            width: "90%",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            marginTop: 50,
-                            height: 215,
-                        }}
-                    >
+                    <View style={styles.componentWrapper}>
                         <EvolutionChain chain={fullPokemonObj.chain} />
                     </View>
-                    <View
-                        style={{
-                            width: "90%",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            marginTop: 50,
-                            height: 215,
-                        }}
-                    >
+                    <View style={styles.componentWrapper}>
                         <BarChart
                             stats={fullPokemonObj.stats.map((stat) => ({
                                 name: stat.stat.name,
@@ -333,8 +316,6 @@ const styles = EStyleSheet.create({
         width: 250,
         height: 250,
         borderRadius: 120,
-        // borderWidth: 2,
-        // borderColor: "#333",
         overflow: "hidden",
         position: "relative",
     },
@@ -379,6 +360,13 @@ const styles = EStyleSheet.create({
         margin: 5,
         borderRadius: 10,
         backgroundColor: "#ccc",
+    },
+    componentWrapper: {
+        width: "90%",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginTop: 50,
+        height: 215,
     },
 });
 
