@@ -3,7 +3,7 @@ import React from "react";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 interface FlavorTextProps {
-    text: string;
+    text: string | undefined;
 }
 
 const FlavorTextBox = ({ text }: FlavorTextProps) => {
@@ -14,7 +14,7 @@ const FlavorTextBox = ({ text }: FlavorTextProps) => {
             </View>
             <View style={styles.containerBody}>
                 <Text style={styles.containerText}>
-                    {text.split("\n").join(" ").replace("\f", " ")}
+                    {text?.split("\n").join(" ").replace("\f", " ")}
                 </Text>
             </View>
         </View>

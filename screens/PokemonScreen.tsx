@@ -11,6 +11,7 @@ import BarChart from "../components/BarChartWrapper";
 import GridRow from "../components/GridRow";
 import EStyleSheet from "react-native-extended-stylesheet";
 import Header from "../components/Header";
+import { PokemonObject } from "../typescript/types";
 
 export type RootStackParamList = {
     Pokemon: {
@@ -18,110 +19,13 @@ export type RootStackParamList = {
     };
 };
 
-interface InitialPokemonObject {
-    name: string;
-    id: number;
-    image_url: string;
-    types: [
-        {
-            type: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    stats: [
-        {
-            base_stat: number;
-            stat: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    official_art: string;
-    height: number;
-    weight: number;
-}
-
-interface FinalPokemonObject {
-    name: string;
-    image_url: string;
-    id: number;
-    url: string;
-    types: [
-        {
-            type: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    stats: [
-        {
-            base_stat: number;
-            stat: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    official_art: string;
-    classification: Array<{
-        genus: string;
-        language: {
-            name: string;
-            url: string;
-        };
-    }>;
-    flavor_text: Array<{
-        flavor_text: string;
-        language: {
-            name: string;
-            url: string;
-        };
-    }>;
-    height: number;
-    weight: number;
-    chain: {
-        species: {
-            name: string;
-            url: string;
-        };
-        image_url: string;
-        evolves_to: Array<{
-            species: {
-                name: string;
-                url: string;
-            };
-            image_url: string;
-            evolves_to: Array<{
-                species: {
-                    name: string;
-                    url: string;
-                };
-                image_url: string;
-                evolves_to: Array<{
-                    species: {
-                        name: string;
-                        url: string;
-                    };
-                    image_url: string;
-                    evolves_to: [];
-                }>;
-            }>;
-        }>;
-    };
-}
-
 const JustNamePokemonScreen = () => {
     const {
         params: { pokemon },
     } = useRoute<RouteProp<RootStackParamList, "Pokemon">>();
 
-    const [updatedPokemon, setUpdatedPokemon] =
-        useState<InitialPokemonObject>();
-    const [fullPokemonObj, setFullPokemonObj] = useState<FinalPokemonObject>();
+    const [updatedPokemon, setUpdatedPokemon] = useState<PokemonObject>();
+    const [fullPokemonObj, setFullPokemonObj] = useState<PokemonObject>();
 
     useEffect(() => {
         axios
@@ -138,6 +42,7 @@ const JustNamePokemonScreen = () => {
                     id: data.data.id,
                     stats: data.data.stats,
                     image_url: data.data.sprites.front_default,
+                    classification: undefined,
                 };
 
                 setUpdatedPokemon(updatedPoke);
@@ -256,12 +161,14 @@ const JustNamePokemonScreen = () => {
                         ]}
                     >
                         <FlavorTextBox
-                            text={fullPokemonObj.flavor_text[0].flavor_text}
+                            text={fullPokemonObj.flavor_text?.[0].flavor_text}
                         />
                     </View>
-                    <View style={styles.componentWrapper}>
-                        <EvolutionChain chain={fullPokemonObj.chain} />
-                    </View>
+                    {fullPokemonObj.chain !== undefined ? (
+                        <View style={styles.componentWrapper}>
+                            <EvolutionChain chain={fullPokemonObj.chain} />
+                        </View>
+                    ) : null}
                     <View style={styles.componentWrapper}>
                         <BarChart
                             stats={fullPokemonObj.stats.map((stat) => ({

@@ -4,7 +4,7 @@ import EStyleSheet from "react-native-extended-stylesheet";
 
 interface GridItemProps {
     category: string;
-    value: string;
+    value: string | undefined;
     image: boolean;
 }
 

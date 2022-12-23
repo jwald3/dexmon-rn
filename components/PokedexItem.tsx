@@ -1,15 +1,15 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { UpdatedPokemonResponse } from "../screens/Home";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { capitalize } from "../typescript/functions";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { PokemonObject } from "../typescript/types";
 
 interface PokedexItemProps {
-    pokemon: UpdatedPokemonResponse;
+    pokemon: PokemonObject;
 }
 
 export interface PokemonResponse {

@@ -4,50 +4,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import { capitalize } from "../typescript/functions";
 import GridItem from "./GridItem";
 import EStyleSheet from "react-native-extended-stylesheet";
-
-type UpdatedPoke = {
-    name: string;
-    url: string;
-    image_url: string;
-    id: number;
-    types: [
-        {
-            type: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    stats: [
-        {
-            base_stat: number;
-            stat: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    official_art: string;
-    classification: Array<{
-        genus: string;
-        language: {
-            name: string;
-            url: string;
-        };
-    }>;
-    flavor_text: Array<{
-        flavor_text: string;
-        language: {
-            name: string;
-            url: string;
-        };
-    }>;
-    height: number;
-    weight: number;
-};
+import { PokemonObject } from "../typescript/types";
 
 interface RowProps {
-    pokemon: UpdatedPoke;
+    pokemon: PokemonObject;
 }
 
 const GridRow = ({ pokemon }: RowProps) => {
@@ -66,7 +26,7 @@ const GridRow = ({ pokemon }: RowProps) => {
                 >
                     <GridItem
                         category={"Classification"}
-                        value={pokemon.classification[0].genus}
+                        value={pokemon.classification?.[0]?.genus}
                         image={false}
                     />
                     <GridItem
@@ -97,7 +57,7 @@ const GridRow = ({ pokemon }: RowProps) => {
                 <View style={styles.webViewContainer}>
                     <GridItem
                         category={"Classification"}
-                        value={pokemon.classification[0].genus}
+                        value={pokemon.classification?.[0]?.genus}
                         image={false}
                     />
                     <View style={styles.webGaps} />

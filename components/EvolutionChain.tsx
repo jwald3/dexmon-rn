@@ -3,36 +3,17 @@ import { View, Text, FlatList } from "react-native";
 import EvolutionChainItem from "./EvolutionChainItem";
 import EStyleSheet from "react-native-extended-stylesheet";
 
-interface Props {
-    chain: {
-        species: {
-            name: string;
-            url: string;
-        };
-        image_url: string;
-        evolves_to: Array<{
-            species: {
-                name: string;
-                url: string;
-            };
-            image_url: string;
-            evolves_to: Array<{
-                species: {
-                    name: string;
-                    url: string;
-                };
-                image_url: string;
-                evolves_to: Array<{
-                    species: {
-                        name: string;
-                        url: string;
-                    };
-                    image_url: string;
-                    evolves_to: [];
-                }>;
-            }>;
-        }>;
+export type Evolution = {
+    species: {
+        name: string;
+        url: string;
     };
+    image_url: string;
+    evolves_to: Array<Evolution>;
+};
+
+interface Props {
+    chain: Evolution;
 }
 
 const EvolutionChain: React.FC<Props> = ({ chain }) => {

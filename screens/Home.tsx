@@ -4,48 +4,22 @@ import axios from "axios";
 import PokedexItem from "../components/PokedexItem";
 import Header from "../components/Header";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { PokemonObject } from "../typescript/types";
 
 type BasePokemonResponse = {
     name: string;
     url: string;
 };
 
-export type UpdatedPokemonResponse = {
-    name: string;
-    url: string;
-    image_url: string;
-    id: number;
-    types: [
-        {
-            type: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    stats: [
-        {
-            base_stat: number;
-            stat: {
-                name: string;
-                url: string;
-            };
-        }
-    ];
-    official_art: string;
-    height: number;
-    weight: number;
-};
-
 type RenderPokemon = {
-    item: UpdatedPokemonResponse;
+    item: PokemonObject;
 };
 
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [updatedPokemonList, setUpdatedPokemonList] = useState<
-        Array<UpdatedPokemonResponse>
+        Array<PokemonObject>
     >([]);
 
     useEffect(() => {

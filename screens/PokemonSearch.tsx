@@ -13,7 +13,6 @@ import pokeData from "../data/PokemonData.json";
 import PokedexItem from "../components/PokedexItem";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { ScrollView } from "react-native-gesture-handler";
 
 interface BasicPokemonData {
     name: string;
@@ -97,6 +96,7 @@ const PokemonSearch = () => {
                     official_art: "string",
                     height: 1,
                     weight: 1,
+                    classification: undefined,
                 }}
             />
         );
